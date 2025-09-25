@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medscheduler"
+version = "0.1.9"
+description = "Synthetic outpatient scheduling dataset generator (slots, patients, appointments)."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = "MIT"
+authors = [
+  { name = "Carolina González Galtier" }
+]
+requires-python = ">=3.9"
+dependencies = [
+  "pandas>=1.5.0",
+  "numpy>=1.21.0",
+  "faker>=18.0.0"
+]
+keywords = ["healthcare", "synthetic-data", "appointments", "scheduling", "outpatient", "simulation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed"
+]
+
+[project.optional-dependencies]
+viz = ["matplotlib>=3.5"]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+  "ruff>=0.5",
+  "mypy>=1.7",
+  "build",
+  "twine"
+]
+
+[project.urls]
+repository = "https://github.com/carogaltier/medscheduler"
+"bug_tracker" = "https://github.com/carogaltier/medscheduler/issues"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["medscheduler*"]
+
+[tool.setuptools.package-data]
+medscheduler = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[tool.pytest.ini_options]
+addopts = "-q --cov=medscheduler --cov-report=term-missing"
