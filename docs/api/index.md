@@ -13,9 +13,3 @@ getting-started/installation
 getting-started/quickstart
 ```
 
-```{toctree}
-:maxdepth: 2
-:caption: API Reference
-
-api/index
-```
