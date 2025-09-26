@@ -30,9 +30,14 @@ myst_enable_extensions = ["colon_fence", "deflist", "attrs_block", "attrs_inline
 
 # Theme
 html_theme = "pydata_sphinx_theme"
+html_title = "Medscheduler"
 
 # Logo path
-html_title = "Medscheduler"
 html_logo = "_static/logo.png"
 html_favicon = "_static/logo.png"
 html_static_path = ["_static"]
+html_theme_options = {
+    "logo": {
+        "text": "Medscheduler",
+    },
+}
