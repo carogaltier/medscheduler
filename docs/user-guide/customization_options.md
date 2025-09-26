@@ -68,7 +68,6 @@ sched = AppointmentScheduler(
     working_days=[0,1,2,3,4],  # Mon–Fri
     appointments_per_hour=6,
     fill_rate=0.9,
-    status_rates={"attended": 0.75, "did not attend": 0.1, "cancelled": 0.12, "unknown": 0.03},
     check_in_time_mean=-10,  # patients arrive ~10 minutes early
 )
 slots, appointments, patients = sched.generate()
