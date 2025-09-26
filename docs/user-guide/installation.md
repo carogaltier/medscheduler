@@ -1,75 +1,88 @@
 # Installation
 
-`medscheduler` targets **Python 3.9+** and follows PEP 621 packaging. The library has a small set of core
-dependencies to keep installs lightweight. Optional visualization helpers require `matplotlib`.
+`medscheduler` targets **Python 3.9+** and follows PEP 621 packaging standards.  
+The core package is lightweight, with minimal dependencies to ensure fast installation.  
+Optional visualization helpers can be installed via the `[viz]` extra.
 
-## Quick install (pip)
+## Quick install with pip
+
+Install the core package from PyPI:
 
 ```bash
 pip install medscheduler
 ```
 
-To enable the optional plotting utilities:
+To include optional plotting utilities:
 
 ```bash
-pip install matplotlib
+pip install medscheduler[viz]
 ```
 
 ## Verify your setup
 
+After installation, you can run a quick smoke test:
+
 ```python
 from medscheduler import AppointmentScheduler
 
-# Basic smoke test
 s = AppointmentScheduler(seed=0)
 print("appointments/hour:", s.appointments_per_hour)
 ```
 
-If this runs without errors, your installation is OK.
+If this executes without errors, your installation is successful.
 
-## Supported Python versions
+## Supported environments
 
-- CPython 3.9, 3.10, 3.11 (and newer, as available on PyPI/RTD)
-- OS: Linux, macOS, Windows (pure-Python package)
+- **Python versions:** 3.9, 3.10, 3.11 (and newer when available)  
+- **Operating systems:** Linux, macOS, Windows (pure‑Python package, no compilation required)
 
-## Alternative installs
+## Recommended: isolated environments
 
-### Using Conda/Mamba
+To avoid conflicts with other packages, install medscheduler in a virtual environment:
+
+### Conda/Mamba
 
 ```bash
-# Create an environment (recommended)
+# Create a new environment
 mamba create -n medscheduler -y python=3.11
 mamba activate medscheduler
 
-# Install from PyPI inside the environment
-pip install medscheduler
-# Optional plotting
-pip install matplotlib
+# Install medscheduler from PyPI
+pip install medscheduler[viz]
 ```
 
-### Editable/development install (from source)
+### Virtualenv (venv)
 
 ```bash
-git clone https://github.com/<your-org-or-user>/medscheduler.git
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install medscheduler[viz]
+```
+
+## Development install (from source)
+
+If you plan to modify or contribute to the library:
+
+```bash
+git clone https://github.com/carogaltier/medscheduler.git
 cd medscheduler
 python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -e .
-# Optional plotting
-pip install matplotlib
+pip install -e .[viz]
 ```
 
 ## Troubleshooting
 
-- **Build fails on Read the Docs**: ensure `docs/requirements.txt` includes `sphinx`, `myst-parser`,
-  `myst-nb`, `pydata-sphinx-theme`, and any optional extras you import in docs.
-- **ImportError for pandas/numpy**: upgrade pip and retry:
+- **Missing dependencies (e.g., pandas, numpy):**  
+  Upgrade pip and reinstall core libraries:  
   ```bash
   python -m pip install --upgrade pip
   pip install --upgrade numpy pandas
   ```
-- **Conflicting environments**: prefer a clean virtual environment (venv/conda) and reinstall.
+
+- **Conflicting environments:**  
+  Always prefer a clean environment (`venv` or `conda`). Remove old installs before retrying.
 
 ## Next steps
 
-- Read **What is medscheduler?** for an overview of concepts and outputs.
-- Jump to **Quickstart** to generate your first synthetic dataset and export CSV files.
+- Continue to **What is Medscheduler?** for an overview of concepts and outputs.  
+- Jump to **Quickstart** to generate your first synthetic dataset and export CSV files.  
