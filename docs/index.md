@@ -1,9 +1,3 @@
-```{image} _static/logo.png
-:alt: Medscheduler logo
-:align: center
-:width: 220px
-```
-
 # Medscheduler
 
 **Medscheduler** is a Python library for generating synthetic outpatient scheduling datasets.  
@@ -28,11 +22,11 @@ Outputs are returned as pandas DataFrames, with optional CSV export.
 
 ## User Guide
 
-Conceptual and practical documentation for new users.  
-Covers installation, quickstart, outputs, and customization options.
+The User Guide introduces the main concepts of **medscheduler**. It provides step-by-step instructions
+to install the library, run a quickstart example, and explore the generated outputs. This section also
+explains key configuration parameters and how to adapt the scheduler to different teaching or research contexts.
 
 ```{toctree}
-:caption: User Guide
 :maxdepth: 2
 
 user-guide/index
@@ -40,11 +34,11 @@ user-guide/index
 
 ## API Reference
 
-Technical documentation of all classes, methods, and constants.  
-Includes the `AppointmentScheduler` class and utility modules.
+The API Reference is the technical specification of the package. It contains detailed documentation of
+the `AppointmentScheduler` class, its constructor arguments, and all public methods. Utility modules and
+constants are also documented here, serving as a complete reference for developers who need fine-grained control.
 
 ```{toctree}
-:caption: API Reference
 :maxdepth: 2
 
 api-reference/index
@@ -52,11 +46,11 @@ api-reference/index
 
 ## Visualization
 
-Plotting and analysis helpers for exploring synthetic scheduling data.  
-Shows how to generate charts for slots, patients, and appointments.
+The Visualization section focuses on functions that help analyze and display the generated data. It shows how
+to produce plots of slot availability, patient demographics, and appointment outcomes. These visualizations are
+useful for dashboards, teaching, and exploratory data analysis.
 
 ```{toctree}
-:caption: Visualization
 :maxdepth: 2
 
 visualization/index
@@ -64,11 +58,11 @@ visualization/index
 
 ## Examples
 
-Applied scenarios showing how to use medscheduler in practice.  
-Includes code samples with inputs and expected outputs.
+The Examples section demonstrates practical scenarios using **medscheduler**. Each example includes code snippets,
+expected outputs, and guidance on interpreting results. Topics include attendance analysis, cancellations,
+overbooking strategies, and integration with analytics tools.
 
 ```{toctree}
-:caption: Examples
 :maxdepth: 2
 
 examples/index
