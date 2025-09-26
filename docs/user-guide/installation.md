@@ -84,5 +84,5 @@ pip install -e .[viz]
 
 ## Next steps
 
-- Continue to {doc}`What is Medscheduler` for an overview of concepts and outputs.  
-- Jump to {doc}`Quickstart` to generate your first synthetic dataset and export CSV files.  
+- Continue to {doc}`what_is_medscheduler` for an overview of concepts and outputs.  
+- Jump to {doc}`quickstart` to generate your first synthetic dataset and export CSV files.  
