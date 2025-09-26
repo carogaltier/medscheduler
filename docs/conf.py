@@ -12,7 +12,6 @@ release = ""  # set from package version dynamically if you prefer
 
 extensions = [
     "myst_parser",
-    "myst_nb",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosectionlabel",
@@ -24,7 +23,7 @@ extensions = [
 
 # MyST / MyST-NB options
 myst_enable_extensions = ["colon_fence", "deflist", "attrs_block", "attrs_inline"]
-nb_execution_mode = "off" 
+
 
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
