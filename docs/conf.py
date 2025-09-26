@@ -12,7 +12,7 @@ release = ""  # set from package version dynamically if you prefer
 
 extensions = [
     "myst_parser",
-    "myst_nb",  # render notebooks if you add any to docs/
+    "myst_nb",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosectionlabel",
@@ -21,11 +21,11 @@ extensions = [
     "sphinx.ext.viewcode",
 ]
 
+
 # MyST / MyST-NB options
 myst_enable_extensions = ["colon_fence", "deflist", "attrs_block", "attrs_inline"]
-nb_execution_mode = "off"   # keep RTD builds fast; pre-execute notebooks locally
+nb_execution_mode = "off" 
 
-# Theme
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
     "show_prev_next": False,
@@ -52,5 +52,5 @@ autodoc_default_options = {
     "inherited-members": True,
 }
 
-# For stable section refs across pages
+
 autosectionlabel_prefix_document = True
