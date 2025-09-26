@@ -37,7 +37,7 @@ html_theme = "pydata_sphinx_theme"
 html_title = "medscheduler documentation"
 
 html_theme_options = {
-    "show_toc_level": 2,  
+  "show_nav_level": 2
 }
 
 # Don't try to build API folder for now (until we wire autodoc)
