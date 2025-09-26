@@ -79,7 +79,7 @@ patients_df.head()
 ```
 
 Synthetic patient registry.  
-Columns: `patient_id`, `name` (Faker), `sex`, `age` (or `dob` + `age_group` if configured).
+Columns: `patient_id`, `name` (Faker), `sex`, `dob`.
 
 ---
 
