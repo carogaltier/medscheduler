@@ -36,5 +36,9 @@ myst_enable_extensions = ["colon_fence", "deflist", "attrs_block", "attrs_inline
 html_theme = "pydata_sphinx_theme"
 html_title = "medscheduler documentation"
 
+html_theme_options = {
+    "show_toc_level": 2,  
+}
+
 # Don't try to build API folder for now (until we wire autodoc)
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "api/**"]
