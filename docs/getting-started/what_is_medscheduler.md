@@ -1,14 +1,14 @@
 # What is medscheduler?
 
 **medscheduler** is a Python library that generates **synthetic outpatient scheduling data** suitable for
-education, dashboards, experimentation, and benchmarking—**without** privacy risks.
+education, dashboards and experimentation **without** privacy risks.
 
 It simulates three components and returns them as pandas DataFrames (and optional CSV export):
 
-- **appointments** — the **main** table with everything most users need (identifiers, scheduling fields,
+- **appointments**: the **main** table with everything most users need (identifiers, scheduling fields,
   outcomes, demographics, and attended‑visit timing).
-- **slots** — the calendar capacity (working days/hours and slot density) with availability.
-- **patients** — a synthetic registry used to populate the appointments table.
+- **slots**: the calendar capacity (working days/hours and slot density) with availability.
+- **patients**: a synthetic registry used to populate the appointments table.
 
 ## Key capabilities
 
@@ -24,16 +24,19 @@ It simulates three components and returns them as pandas DataFrames (and optiona
 
 ## Typical use cases
 
-- Teaching analytics (SQL, pandas), data‑viz exercises, and BI dashboards
+- Teaching analytics (SQL, pandas), data-viz exercises, and BI dashboards  
   (utilization, punctuality, cancellations, waiting time, duration).
 - Rapid prototyping of scheduling heuristics or overbooking strategies.
-- Benchmark data for ETL pipelines, data quality checks, or feature engineering tutorials.
+- Demonstrating **ETL pipelines** or database integration with synthetic but realistic healthcare data.
+- Practicing **machine learning workflows** on time-series or tabular data without privacy concerns.
+- Building **interactive apps or dashboards** to showcase scheduling insights.
+- Supporting **academic courses, workshops, or portfolio projects** where real patient data cannot be shared.
 
 ## Outputs at a glance
 
 - **appointments** (primary): `appointment_id`, `slot_id`, `patient_id`, `scheduling_date`,
   `scheduling_interval`, `appointment_date`, `appointment_time`, `status`, patient `sex`/`age`/`age_group`,
-  and—when attended—`check_in_time`, `start_time`, `end_time`, `waiting_time`, `appointment_duration`.
+  and when attended `check_in_time`, `start_time`, `end_time`, `waiting_time`, `appointment_duration`.
 - **slots** (auxiliary): `slot_id`, `appointment_date`, `appointment_time`, `is_available`.
 - **patients** (auxiliary): `patient_id`, `name` (Faker), `sex`, `age` (or `dob` + `age_group` depending on settings).
 
