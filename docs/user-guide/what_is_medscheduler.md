@@ -74,6 +74,6 @@ If you need inpatient pathways or multi‑department scheduling, Medscheduler ca
 
 ## Next steps
 
-See [Installation](installation.md) to set up the package.
-Follow the [Quickstart](quickstart.md) to generate your first dataset.
-Explore [Visualization](../visualization/index.md) and [Examples](../examples/index.md) for applied scenarios.
+Go to {doc}`installation` to set up the package.  
+Follow {doc}`quickstart` to generate your first dataset.  
+Explore {doc}`../visualization/index` and {doc}`../examples/index` for advanced workflows.
