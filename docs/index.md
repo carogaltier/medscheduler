@@ -5,7 +5,7 @@ Welcome to **medscheduler** — a Python library for generating **synthetic outp
 The library is designed for education, dashboards, and prototyping without privacy risks, providing a realistic yet fully synthetic pipeline with NHS‑derived defaults (overrideable).
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 3
 :caption: Getting started
 
 getting-started/what_is_medscheduler
