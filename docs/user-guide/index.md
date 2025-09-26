@@ -1,11 +1,14 @@
 # User Guide
 
-This section will provide conceptual and practical guides for using **medscheduler**.
+The **User Guide** introduces the main concepts of Medscheduler and provides step‑by‑step documentation
+to help new users install the package, generate their first dataset, and understand the available outputs.
 
-- What is medscheduler?
-- Installation
-- Quickstart
-- Outputs overview
-- Customization options
+```{toctree}
+:maxdepth: 2
 
-*Content coming soon…*
+what_is_medscheduler
+installation
+quickstart
+outputs_overview
+customization_options
+```
