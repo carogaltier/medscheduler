@@ -38,3 +38,19 @@ html_title = "Medscheduler"
 
 # Don't try to build API folder for now (until we wire autodoc)
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "api/**"]
+
+# Logo path (relative to docs/)
+html_logo = "_static/logo.png"
+
+# Opcional: favicon
+html_favicon = "_static/logo.png"
+
+# Theme options
+html_theme_options = {
+    "logo": {
+        "text": "Medscheduler",
+    },
+    "show_toc_level": 2,
+}
+
+html_static_path = ["_static"]
