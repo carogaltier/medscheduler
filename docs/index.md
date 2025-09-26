@@ -1,7 +1,7 @@
 # Medscheduler
 
 **Medscheduler** is a Python library for generating synthetic outpatient scheduling datasets.  
-It creates realistic but fully synthetic data for teaching, dashboards, prototyping, and research, without privacy concerns.
+It creates realistic but fully synthetic data for teaching, dashboards and prototyping without privacy concerns.
 
 The library simulates three main components:
 
