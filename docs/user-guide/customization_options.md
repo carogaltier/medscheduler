@@ -86,5 +86,5 @@ slots, appointments, patients = sched.generate()
 
 ## Next steps
 
-- Continue to the {doc}`Visualization` section to learn how to plot the generated datasets.  
-- Visit {doc}../examples/index`Examples` for applied scenarios such as attendance analysis and overbooking simulations.  
+- Continue to the {doc}`../visualization/index` section to learn how to plot the generated datasets.  
+- Visit {doc}`../examples/index` for applied scenarios such as attendance analysis and overbooking simulations.  
