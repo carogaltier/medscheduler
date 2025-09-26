@@ -2,14 +2,14 @@ import os
 import sys
 from datetime import datetime
 
-# Add src to path for autodoc (optional)
+# Make package importable for autodoc (if enabled later)
 sys.path.insert(0, os.path.abspath("../src"))
 
 project = "medscheduler"
 author = "medscheduler contributors"
 copyright = f"{datetime.now():%Y}, {author}"
-release = ""  # set from package version dynamically if you prefer
 
+# Use MyST Markdown only (no myst-nb) to avoid extension conflicts
 extensions = [
     "myst_parser",
     "sphinx.ext.autodoc",
@@ -20,36 +20,21 @@ extensions = [
     "sphinx.ext.viewcode",
 ]
 
+# Root document is index.md (not index.rst)
+root_doc = "index"
 
-# MyST / MyST-NB options
+# Recognize both .md and .rst files
+source_suffix = {
+    ".md": "markdown",
+    ".rst": "restructuredtext",
+}
+
+# MyST options
 myst_enable_extensions = ["colon_fence", "deflist", "attrs_block", "attrs_inline"]
 
-
+# Theme
 html_theme = "pydata_sphinx_theme"
-html_theme_options = {
-    "show_prev_next": False,
-    "navbar_align": "content",
-    "logo": {
-        "text": "medscheduler",
-    },
-    "navigation_depth": 3,
-}
-html_static_path = []
 html_title = "medscheduler documentation"
 
-# Intersphinx (optional examples)
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", {}),
-    "numpy": ("https://numpy.org/doc/stable/", {}),
-    "pandas": ("https://pandas.pydata.org/docs/", {}),
-}
-
-# Autodoc (optional)
-autodoc_default_options = {
-    "members": True,
-    "undoc-members": False,
-    "inherited-members": True,
-}
-
-
-autosectionlabel_prefix_document = True
+# Don't try to build API folder for now (until we wire autodoc)
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "api/**"]
