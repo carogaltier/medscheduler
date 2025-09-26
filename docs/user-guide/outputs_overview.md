@@ -73,4 +73,4 @@ Demographics are generated using age–sex distributions derived from NHS data, 
 - **Slots** enables capacity and utilization studies.  
 - **Patients** provides demographic context and can be linked to appointments for richer analysis.  
 
-For advanced configuration of how these tables are generated, continue to the **Customization options** section.
+For advanced configuration of how these tables are generated, continue to the {doc}`Customization options` section.
