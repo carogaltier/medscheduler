@@ -79,7 +79,7 @@ Each hour is divided into equally sized slots, and this parameter sets the numbe
 
 ### Validation
 - Must be an integer that divides 60 evenly.  
-- Valid values include: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60.  
+- Valid values include: 1, 2, 3, 4, 5, 6.  
 - Any invalid value raises a `ValueError`.  
 
 ### Derived attribute
