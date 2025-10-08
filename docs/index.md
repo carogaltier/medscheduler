@@ -1,24 +1,39 @@
 # Medscheduler
 
-**Medscheduler** is a Python library for generating synthetic outpatient scheduling datasets.  
-It creates realistic but fully synthetic data for teaching, dashboards and prototyping without privacy concerns.
+**Medscheduler** is a Python library for generating fully synthetic outpatient scheduling datasets.  
+It provides realistic yet non-identifiable data for **education**, **research**, and **prototyping**, enabling the exploration of healthcare operations without privacy risks.
 
-The library simulates three main components:
+## Introduction
 
-- **Slots**: configurable appointment calendars (days, hours, and density).  
-- **Patients**: synthetic registry with realistic age–sex distribution.  
-- **Appointments**: the main table linking slots and patients with attendance outcomes.
+Access to real-world healthcare data is often limited by privacy regulations, ethical restrictions, and administrative barriers.  
+Because most clinical records contain identifiable or sensitive information, researchers and educators must navigate complex approval processes that can delay innovation and hinder reproducibility.
 
-Outputs are returned as pandas DataFrames, with optional CSV export.
+**Synthetic data** offer a practical solution. They are artificially generated datasets that reproduce the statistical structure of real-world data without including identifiable patient information.  
+**Medscheduler** simulates outpatient appointment activity through a parameterized scheduler that reproduces plausible demographic distributions, booking behaviors, and attendance patterns.  
+Default configurations are informed by **NHS England outpatient statistics** and peer-reviewed research on punctuality, rebooking, and visit frequency.
 
-## Key features
+## Key features and use cases
 
-- Synthetic scheduling pipeline: slots, patients, and appointments.  
-- Configurable: working days, hours, slot density, attendance rates, cancellations, rebooking.  
-- Safe for sharing: fully synthetic, no real patient data.  
-- Analytics ready: integration with pandas and visualization helpers.  
+- End-to-end synthetic scheduling pipeline (slots, patients, appointments).  
+- Configurable parameters for calendars, slot density, fill rates, rebooking, attendance, and punctuality.  
+- Safe for sharing — fully synthetic and privacy-preserving.  
+- Ready for analytics and visualization with pandas and matplotlib.  
+- Suitable for:  
+  - **Education and training** in health data science and operational analytics.  
+  - **Prototyping and experimentation** with scheduling algorithms, dashboards, and predictive models.  
+  - **Open and reproducible research** without the constraints of restricted datasets. 
 
----
+## Simulation overview
+
+The generator models a synthetic outpatient scheduling system with three core components:
+
+- **Slots** — Configurable daily calendars with working days, operating hours, and slot density.  
+- **Patients** — Synthetic registry with realistic age-sex distributions derived from NHS data.  
+- **Appointments** — Booked appointments linking patients to slots with probabilistic attendance, cancellations, and rebooking outcomes.
+
+Outputs are returned as **pandas DataFrames**, with optional CSV export.
+
+
 
 ## User Guide
 
