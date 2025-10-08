@@ -12,6 +12,7 @@ Because most clinical records contain identifiable or sensitive information, res
 **Medscheduler** simulates outpatient appointment activity through a parameterized scheduler that reproduces plausible demographic distributions, booking behaviors, and attendance patterns.  
 Default configurations are informed by **NHS England outpatient statistics** and peer-reviewed research on punctuality, rebooking, and visit frequency.
 
+
 ## Key features and use cases
 
 - End-to-end synthetic scheduling pipeline (slots, patients, appointments).  
@@ -32,6 +33,7 @@ The generator models a synthetic outpatient scheduling system with three core co
 - **Appointments** — Booked appointments linking patients to slots with probabilistic attendance, cancellations, and rebooking outcomes.
 
 Outputs are returned as **pandas DataFrames**, with optional CSV export.
+The codebase is modular and extensible. Simulation parameters and behavioral assumptions can be overridden via class arguments or extended methods, enabling adaptation to different countries, health systems, or research needs. 
 
 
 
