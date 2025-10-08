@@ -33,12 +33,10 @@ This reproduces real-world scheduling patterns where upcoming calendars are only
 ## `booking_horizon`
 
 ### Purpose
-Defines how far into the future patients can book appointments.  
-The horizon acts as a soft limit, extending the available date range if needed.
+Defines how far into the future patients can book appointments. The horizon acts as a soft limit, extending the available date range if needed.
 
 ### Defaults
-- Default = **30 days**.  
-  This is a balanced value between accessibility and stability, based on observed outpatient booking behavior.
+- Default = **30 days**. This is a balanced value between accessibility and stability, based on observed outpatient booking behavior.
 
 ### Behavior
 If `booking_horizon=30`, the scheduler ensures that the **latest date range extends at least 30 days beyond the reference date**.  
@@ -60,8 +58,7 @@ It shapes the lead-time distribution, influencing how early patients tend to sch
 - Default = **10 days**, based on observed median waiting times in U.S. primary care [3].  
 
 ### Behavior
-A lower `median_lead_time` implies a more reactive booking process (patients book close to the appointment date).  
-Higher values simulate systems where appointments are planned further in advance.
+A lower `median_lead_time` implies a more reactive booking process (patients book close to the appointment date). Higher values simulate systems where appointments are planned further in advance.
 
 ---
 
