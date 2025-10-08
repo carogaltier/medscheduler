@@ -119,6 +119,7 @@ class AppointmentScheduler:
     fill_rate : float, default 0.9
         Proportion of slots to be filled with appointments. The value must be between 0.3 and 1.0. 
         Values below 0.3 imply implausibly low utilization and are likely to yield unrealistic scheduling behavior.
+        The default is `0.9`, meaning 90% of all generated slots are used.
 
     booking_horizon : int, default 30
         Maximum number of days into the future that can be booked. Used to extend
