@@ -115,7 +115,7 @@ print(appointments[["appointment_date", "check_in_time", "start_time", "end_time
 
 ### Next steps
 
-- {doc}`attendance_behavior` – explains appointment outcomes and rebooking probabilities.  
-- {doc}`booking_dynamics` – describes how future and past slots are filled.  
-- {doc}`calendar_structure` – defines working hours and slot configuration.
+- {doc}`appointments_table` — presents how timing and outcome variables are stored for each scheduled appointment.  
+- {doc}`randomness_and_noise` — explains how stochastic variation affects punctuality and duration distributions.
+
 
