@@ -129,8 +129,7 @@ Each column is generated deterministically under the same random `seed`, ensurin
 
 ---
 
-## Next steps
+### Next steps
 
-- {doc}`patients_table` – see how patient records are structured before extending them.  
-- {doc}`randomness_and_noise` – learn how `seed` and `noise` affect reproducibility.  
-- {doc}`appointments_table` – main analytical output where patient attributes can be joined for stratified analyses.
+- {doc}`patients_table` — provides the base structure where custom columns are added.  
+- {doc}`randomness_and_noise` — explains how stochastic noise influences the sampling of custom categorical distributions.
