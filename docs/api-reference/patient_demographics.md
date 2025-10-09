@@ -125,7 +125,7 @@ This behavior ensures that pediatric cases are not simulated unless explicitly a
 
 ### Next steps
 
-- {doc}`patient_flow` – describes patient recurrence and first-attendance patterns.  
-- {doc}`attendance_behavior` – explains appointment outcomes and rebooking mechanisms.  
-- {doc}`calendar_structure` – defines the working calendar used for appointments.
+- {doc}`appointment_timing` — details how punctuality and consultation duration are simulated for attended patients.  
+- {doc}`patients_table` — shows how demographic attributes are represented in the generated patient registry.
+
 
