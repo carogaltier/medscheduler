@@ -103,7 +103,7 @@ sched.generate()
 
 ### Next steps
 
-- {doc}`attendance_behavior` – explains appointment outcomes and rebooking mechanisms.  
-- {doc}`booking_dynamics` – defines how appointments are scheduled and filled over time.  
-- {doc}`calendar_structure` – describes how working hours and slots are organized.
+- {doc}`patient_demographics` — defines the age and sex distributions for the simulated patient population.  
+- {doc}`patients_table` — describes the structure of the patient registry generated from these visit patterns.
+
 
