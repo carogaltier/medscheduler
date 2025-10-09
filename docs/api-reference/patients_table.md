@@ -139,7 +139,7 @@ Example output:
 
 ---
 
-## Next steps
+### Next steps
 
-- {doc}`slots_table` – defines the structure and generation of appointment slots.  
-- {doc}`appointments_table` – explains how patient records are linked to appointment outcomes.
+- {doc}`custom_columns` — describes how to enrich the patient registry with new categorical variables or attributes.  
+- {doc}`appointments_table` — illustrates how patient identifiers link to scheduled appointments.
