@@ -76,54 +76,30 @@ class AppointmentScheduler:
         List of (start_date, end_date) ranges for available appointment slots.
         Each value may be ISO string "YYYY-MM-DD", datetime.date, datetime.datetime,
         pandas.Timestamp or numpy.datetime64. Internally normalized to naive datetimes.
-
-        Defaults and behavior:
-        - If BOTH `date_ranges` and `ref_date` are omitted, a deterministic, reproducible
-          window is used: [2024-01-01 00:00, 2024-12-31 23:59].
-        - If `date_ranges` is omitted but `ref_date` is supplied, the same deterministic
-          window is used (as above), with `ref_date` respected.
-        - If `date_ranges` is provided but `ref_date` is omitted, `ref_date` defaults to
-          the last day (00:00) of the latest provided range.
-        - Non-contiguous ranges are allowed. Each (start, end) must satisfy start < end.
-          If `end` is provided at 00:00, it is expanded to 23:59 of that day.
+        (See date_ranges_ref_date.md for details.)
 
     ref_date : date-like, optional
-        Reference date dividing past and future appointments. Accepts ISO "YYYY-MM-DD",
-        datetime.date, datetime.datetime, pandas.Timestamp or numpy.datetime64. Internally
-        normalized to a naive datetime at 00:00.
+        Reference date dividing past and future appointments. If omitted, defaults
+        to 2024-12-01 00:00 or to the last day of the last range in `date_ranges`.
+        Must fall within at least one defined range.
 
-        Defaults and validation:
-        - If omitted AND `date_ranges` is omitted, defaults to 2024-12-01 00:00
-          (for reproducible runs).
-        - If omitted AND `date_ranges` is provided, defaults to the last day (00:00)
-          of the latest range in `date_ranges`.
-        - If provided explicitly, it must lie within at least one of the `date_ranges`;
-          otherwise a ValueError is raised.
-
-        Effective window:
-        - The end of the latest range is extended, if needed, to ensure it reaches at least
-          `ref_date + booking_horizon` (at 23:59). Existing ranges are never shortened.
-
-    working_days : list of int, default (0..4)
+    working_days : list[int], default (0..4)
         Weekdays when appointments occur (0=Mon, 6=Sun).
 
     appointments_per_hour : int, default 4
         Number of bookable slots per hour. Must divide 60 evenly.
+        This setting reflects a typical 15-minute visit schedule [1].
 
-    working_hours : list[tuple[int, int]] | tuple[int, int] | list[tuple[str, str]] | tuple[str, str], default [(8, 18)]
+    working_hours : list[tuple[int, int]] or tuple[int, int] or list[tuple[str, str]] or tuple[str, str], default [(8, 18)]
         Working periods during the day. Each block is (start, end).
-        Accepts integer hours (e.g., (8, 16)) or strings "HH" / "HH:MM" with minutes in {00, 30}
-        (e.g., ("08:00", "16:00")). Multiple blocks allowed; they must be non-overlapping
-        and are automatically sorted.
+        Accepts integer hours or strings “HH:MM” with minutes in {00,30}.
+        Multiple non-overlapping blocks are supported.
 
     fill_rate : float, default 0.9
-        Proportion of slots to be filled with appointments. The value must be between 0.3 and 1.0. 
-        Values below 0.3 imply implausibly low utilization and are likely to yield unrealistic scheduling behavior.
-        The default is `0.9`, meaning 90% of all generated slots are used.
+        Proportion of slots to be filled with appointments (0.3 ≤ fill_rate ≤ 1.0).
 
     booking_horizon : int, default 30
-        Maximum number of days into the future that can be booked. Used to extend
-        the end of the latest range in `date_ranges` to at least `ref_date + booking_horizon`.
+        Maximum number of days into the future that can be booked.
 
     median_lead_time : int, default 10
         Median lead time (days between scheduling and appointment).
@@ -138,19 +114,34 @@ class AppointmentScheduler:
         Average patient arrival offset (minutes relative to appointment time).
 
     visits_per_year : float, default 1.2
-        Average visits per patient per year.
+        Average number of visits per patient per year.
 
     first_attendance : float, default 0.325
         Proportion of first attendances among all visits.
 
+    month_weights : dict[int, float] or list[float], default NHS-derived
+        Monthly seasonality adjustment factors (Apr 2023–Mar 2024) stored in `constants.py`.
+        - **Dict form:** `{1–12 → float}` (Jan–Dec), values ≥ 0  
+        - **List/Tuple form:** 12 numeric values interpreted as Jan→Dec  
+        Missing months default to 1.0.  
+        All values are renormalized so that mean = 1.0.
+
+    weekday_weights : dict[int, float] or list[float], default NHS-derived
+        Weekday-level adjustment factors stored in `constants.py` (Ellis & Jenkins, 2012).
+        - **Dict form:** `{0–6 → float}` (Mon–Sun), values ≥ 0  
+        - **List/Tuple form:** 7 numeric values interpreted as Mon→Sun  
+        Missing days default to 1.0.  
+        All values are renormalized so that mean = 1.0.  
+        Zero values disable scheduling for that weekday.
+
     bin_size : int, default 5
-        Size of age bins for cohort simulation.
+        Age bin size for cohort simulation.
 
     lower_cutoff : int, default 15
-        Minimum age for included patients.
+        Minimum patient age.
 
     upper_cutoff : int, default 90
-        Maximum age for included patients.
+        Maximum patient age.
 
     truncated : bool, default True
         Whether to truncate ages outside cutoffs.
@@ -159,26 +150,25 @@ class AppointmentScheduler:
         Random seed for reproducibility.
 
     noise : float, default 0.1
-        Random noise factor for patient age distribution.
+        Random noise factor in the patient age distribution.
 
     Attributes
     ----------
     slots_df : pd.DataFrame
         Auxiliary table of appointment slots.
     appointments_df : pd.DataFrame
-        Main table of appointments, with demographics and outcomes.
+        Main table of appointments with demographics and outcomes.
     patients_df : pd.DataFrame
-        Auxiliary table of patient registry.
+        Auxiliary patient registry.
 
     Notes
     -----
-    - All date-like inputs are parsed to naive `datetime` (timezone information is dropped).
-    - `working_hours` minutes are restricted to {00, 30} by design; extend the parser
-      cautiously if you need finer granularity.
-    - The effective calendar window is the union of `date_ranges` with an extension
-      on the latest range’s end to satisfy `ref_date + booking_horizon` when necessary.
+    - All date-like inputs are parsed to naive `datetime` (timezone dropped).
+    - `working_hours` minutes restricted to {00, 30}.
+    - Calendar window = union of `date_ranges`, extended to `ref_date + booking_horizon`.
+    - Month and weekday weights jointly define the temporal probability
+      of slot utilization, ensuring realistic seasonality patterns.
     """
-
     # -----------------------------------------------------------------------
     # Internal validation helpers
     # -----------------------------------------------------------------------
