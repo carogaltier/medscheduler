@@ -103,5 +103,7 @@ print(appointments.head())
 
 ### Next steps
 
-Continue to {doc}`date_ranges_ref_date` to explore how simulation windows and reference dates define temporal boundaries.
+- {doc}`date_ranges_ref_date` — defines the temporal window and reference point of the simulation.  
+- {doc}`calendar_structure` — details the working-day patterns and slot configuration used during generation.
+
 
