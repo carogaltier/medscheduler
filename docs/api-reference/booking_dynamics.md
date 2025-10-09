@@ -52,8 +52,7 @@ It acts as a soft temporal limit and ensures the available date range extends be
 
 ### Format
 **Type:** int  
-**Default:** `30` (days)  
-**Units:** days ahead of the reference date  
+**Default:** `30` days ahead of the reference date. The value is based on observed median wait times in U.S. primary care settings.
 **Typical range:** 7–90 days
 
 ### Validation rules
