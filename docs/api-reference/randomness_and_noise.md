@@ -106,7 +106,7 @@ sched = AppointmentScheduler(seed=None, noise=0.3)
 
 ### Next steps
 
-- {doc}`patient_demographics` – defines how demographic sampling probabilities are generated.  
-- {doc}`booking_dynamics` – explains how appointments are distributed over time.  
-- {doc}`attendance_behavior` – describes outcome probabilities and rebooking behavior.
+- {doc}`appointments_table` — shows how stochastic variability influences the generated appointment outcomes.  
+- {doc}`custom_columns` — demonstrates how the same noise parameter applies when sampling user-defined categorical columns.
+
 
