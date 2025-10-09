@@ -123,7 +123,8 @@ sched = AppointmentScheduler(
 
 ### Next steps
 
-- {doc}`calendar_structure` – defines the weekly structure of the appointment calendar, including working days, hours, and slot density.
-- {doc}`booking_dynamics` – explore how fill rate and booking horizon determine slot utilization.  
+- {doc}`calendar_structure` — defines how working days, hours, and slot density are structured within the generated calendar.  
+- {doc}`booking_dynamics` — explains how appointments are distributed across that calendar window.
+
 
 
