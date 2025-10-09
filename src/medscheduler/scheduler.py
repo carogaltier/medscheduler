@@ -677,24 +677,54 @@ class AppointmentScheduler:
 
         self.age_gender_probs = agp_df.reset_index(drop=True)
 
+
         # ============================
         # VALIDATION: month_weights
         # ============================
-        if not isinstance(month_weights, Mapping):
-            raise TypeError("`month_weights` must be a mapping of {month:int → weight:float}.")
-        mw = dict(month_weights)  
+        if isinstance(month_weights, Mapping):
+            mw = dict(month_weights)
+        elif isinstance(month_weights, (list, tuple)):
+            if len(month_weights) != 12:
+                raise ValueError("`month_weights` list/tuple must have exactly 12 elements (Jan–Dec).")
+            mw = {i + 1: float(v) for i, v in enumerate(month_weights)}
+        else:
+            raise TypeError(
+                "`month_weights` must be either a mapping {month:int → weight:float} "
+                "or a list/tuple of 12 floats."
+            )
+
+        # Validate keys and values
         if not all(isinstance(m, int) and 1 <= m <= 12 for m in mw.keys()):
             raise ValueError("`month_weights` keys must be integers between 1 and 12.")
+        if not all(isinstance(v, (int, float)) and v >= 0 for v in mw.values()):
+            raise ValueError("`month_weights` values must be non-negative numbers (float or int).")
+        for k in range(1, 13):
+            mw.setdefault(k, 1.0)
+        mw = dict(sorted(mw.items()))
         self.month_weights = mw
+
 
         # ============================
         # VALIDATION: weekday_weights
         # ============================
-        if not isinstance(weekday_weights, Mapping):
-            raise TypeError("`weekday_weights` must be a mapping of {weekday:int → weight:float}.")
-        ww = dict(weekday_weights)
+        if isinstance(weekday_weights, Mapping):
+            ww = dict(weekday_weights)
+        elif isinstance(weekday_weights, (list, tuple)):
+            if len(weekday_weights) != 7:
+                raise ValueError("`weekday_weights` list/tuple must have exactly 7 elements (Mon–Sun).")
+            ww = {i: float(v) for i, v in enumerate(weekday_weights)}
+        else:
+            raise TypeError(
+                "`weekday_weights` must be either a mapping {weekday:int → weight:float} "
+                "or a list/tuple of 7 floats."
+            )
         if not all(isinstance(d, int) and 0 <= d <= 6 for d in ww.keys()):
             raise ValueError("`weekday_weights` keys must be integers between 0 and 6 (Mon=0..Sun=6).")
+        if not all(isinstance(v, (int, float)) and v >= 0 for v in ww.values()):
+            raise ValueError("`weekday_weights` values must be non-negative numbers (float or int).")
+        for k in range(0, 7):
+            ww.setdefault(k, 1.0)
+        ww = dict(sorted(ww.items()))
         self.weekday_weights = ww
 
         self._normalize_calendar_weights()
