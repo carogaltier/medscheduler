@@ -12,7 +12,7 @@ Defines the probabilities of different appointment outcomes — whether patients
 ### Format
 **Type:** `dict[str, float]`  
 **Keys:** `{ "attended", "cancelled", "did not attend", "unknown" }`  
-**Default:** Derived from *NHS England Hospital Outpatient Activity 2023–24 (Summary Report 1)*, stored in `constants.py`.  
+**Default:** Derived from *NHS England Hospital Outpatient Activity 2023–24 (Summary Report 1)*, stored in `constants.py` [1].  
 These values represent national outpatient activity proportions for attended, cancelled, missed, and indeterminate outcomes:
 
 ```python
@@ -131,7 +131,7 @@ sched = AppointmentScheduler()  # rebook_category="med"
 
 ### References
 
-NHS England (2024). *Hospital Outpatient Activity 2023–24: Summary Report 1.*  
+[1] NHS England (2024). *Hospital Outpatient Activity 2023–24: Summary Report 1.*  
 [https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
 
 ---
