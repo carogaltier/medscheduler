@@ -124,6 +124,6 @@ sched = AppointmentScheduler(
 ### Next steps
 
 - {doc}`calendar_structure`: complete.  
-- {doc}`booking_dynamics_`: complete.  
+- {doc}`booking_dynamics`: complete.  
 
 
