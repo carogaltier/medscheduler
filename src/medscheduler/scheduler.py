@@ -489,10 +489,18 @@ class AppointmentScheduler:
         # ============================
         # VALIDATION: booking_horizon
         # ============================
-        if not isinstance(booking_horizon, int) or booking_horizon <= 0:
-            raise ValueError("`booking_horizon` must be a positive integer (days).")
+        if not isinstance(booking_horizon, int):
+            raise TypeError("`booking_horizon` must be an integer (days).")
+        
+        if not (7 <= booking_horizon <= 90):
+            raise ValueError(
+                "`booking_horizon` must be between 7 and 90 days. "
+                "Values below 7 produce unrealistically short booking windows, "
+                "and values above 90 are unlikely in outpatient scheduling contexts."
+            )
+        
         self.booking_horizon = booking_horizon
-
+        
         # Effective ranges: ensure latest end reaches at least ref_date + horizon (23:59).
         # Never shorten existing ranges.
         target_end = self._end_of_day(self.ref_date + timedelta(days=self.booking_horizon))
@@ -534,6 +542,7 @@ class AppointmentScheduler:
         if median_lead_time > booking_horizon:
             raise ValueError("`median_lead_time` must be <= `booking_horizon`.")
         self.median_lead_time = median_lead_time
+
 
         # ============================
         # VALIDATION: status_rates
