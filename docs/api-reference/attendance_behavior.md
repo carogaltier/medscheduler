@@ -138,6 +138,6 @@ sched = AppointmentScheduler()  # rebook_category="med"
 
 ### Next steps
 
-- {doc}`booking_dynamics` – explains how slots are filled and how far ahead appointments are booked.  
-- {doc}`seasonality_weights` – shows how seasonal and weekday weights influence slot utilization.  
-- {doc}`calendar_structure` – defines the temporal grid of working days and hours.
+- {doc}`patient_flow` — explains how attendance patterns influence visit frequency and first-attendance ratios.  
+- {doc}`appointments_table` — shows how appointment outcomes are represented in the main output table.
+
