@@ -1,104 +1,143 @@
 # Attendance behavior
 
-The parameters **`status_rates`** and **`rebook_category`** define how appointments behave once scheduled.  
-They determine the **outcome distribution** (attended, cancelled, no-show, unknown) and the **extent to which cancelled slots are rebooked**.
-
-These mechanisms ensure the generated dataset reflects realistic outpatient activity, where missed or cancelled appointments may trigger follow-up bookings according to probabilistic rules.
+The parameters **`status_rates`** and **`rebook_category`** control what happens to appointments once they are scheduled.  
+Together, they define the **probabilities of attendance outcomes** and how often **cancelled or missed appointments are rebooked**.
 
 ---
 
 ## `status_rates`
 
-### Purpose
-Defines the proportion of appointment outcomes — whether patients attend, cancel, or miss their scheduled visit.
+Defines the probabilities of different appointment outcomes — whether patients attend, cancel, or miss their scheduled visit.
 
-### Defaults (NHS 2023–24)
-Derived from NHS England *Hospital Outpatient Activity, Summary Report 1 (2023–24)*.
-
-| Status            | Probability |
-|-------------------|-------------|
-| **attended**      | 0.773 |
-| **cancelled**     | 0.164 |
-| **did not attend**| 0.059 |
-| **unknown**       | 0.004 |
-
-These values represent national averages across all specialties and appointment types.  
-They are validated to ensure the probabilities sum to 1.0 (normalized internally if small deviations occur).
-
-### Behavior
-During simulation, each generated appointment receives one of these outcomes according to the given probabilities.  
-The rates primarily affect **past appointments** (those dated before `ref_date`), but future appointments may also be assigned probabilistically if the user requests a complete calendar simulation.
-
-### Customization
-You may provide custom rates as a dictionary:
+### Format
+**Type:** `dict[str, float]`  
+**Keys:** `{ "attended", "cancelled", "did not attend", "unknown" }`  
+**Default:** Derived from *NHS England Hospital Outpatient Activity 2023–24 (Summary Report 1)*, stored in `constants.py`.  
+These values represent national outpatient activity proportions for attended, cancelled, missed, and indeterminate outcomes:
 
 ```python
-custom_rates = {
-    "attended": 0.80,
-    "cancelled": 0.15,
-    "did not attend": 0.04,
-    "unknown": 0.01,
+{
+    "attended": 0.773,
+    "cancelled": 0.164,
+    "did not attend": 0.059,
+    "unknown": 0.004,
 }
-
-scheduler = AppointmentScheduler(status_rates=custom_rates)
 ```
 
-If values do not sum exactly to 1, they are automatically normalized with a warning.
+**Accepted values:** user-provided dictionary with probabilities in `[0, 1]`.  
+Values are automatically normalized if they do not sum to 1.0.
+
+### Validation rules
+- Must be a dictionary with exactly four keys: `"attended"`, `"cancelled"`, `"did not attend"`, `"unknown"`.  
+- All values must be finite and non-negative.  
+- If the sum of values deviates from 1.0 (tolerance ±1%), a warning is issued and the values are renormalized automatically.  
+- If `status_rates=None`, the default NHS-derived probabilities are used.
+
+### How it works
+Each simulated appointment is assigned one of the four possible outcomes according to these probabilities.  
+The rates reflect national outpatient trends reported by *NHS England Hospital Outpatient Activity (2023–24, Summary Report 1)*.  
+They represent the proportion of attended, cancelled, missed (“did not attend”), and unspecified cases.
+
+- **Attended:** appointment successfully completed.  
+- **Cancelled:** appointment cancelled in advance (by patient or hospital).  
+- **Did not attend (DNA):** missed without cancellation.  
+- **Unknown:** indeterminate or unclassified cases.
+
+If user-specified, these proportions influence the outcome assignment phase of the scheduler.  
+The behavior of cancelled and missed appointments is further governed by `rebook_category`.
+
+### Examples
+
+**Use default NHS England proportions**
+```python
+from medscheduler import AppointmentScheduler
+
+sched = AppointmentScheduler()
+print(sched.status_rates)
+```
+
+**Custom outcome probabilities**
+```python
+sched = AppointmentScheduler(
+    status_rates={
+        "attended": 0.80,
+        "cancelled": 0.10,
+        "did not attend": 0.09,
+        "unknown": 0.01
+    }
+)
+```
 
 ---
 
 ## `rebook_category`
 
-### Purpose
-Controls how frequently cancelled or missed appointments are **rebooked** (i.e., patients who attempt again later).
+Controls whether and how often cancelled appointments are rebooked.  
+This parameter defines the **rebooking intensity**, modeling how outpatient services recycle missed slots.
 
-| Category | Rebook ratio | Description |
-|-----------|--------------|-------------|
-| `'min'`   | 0.0 | No rebooking — cancellations are lost. |
-| `'med'`   | 0.5 | Half of cancellations are rebooked (default). |
-| `'max'`   | 1.0 | All cancelled appointments are rebooked. |
+### Format
+**Type:** `str`  
+**Default:** `"med"`  
+**Accepted values:** `"min"`, `"med"`, `"max"`
 
-### Defaults
-- Default = `'med'` → 50% of cancelled appointments are rebooked.  
-- Valid values: `'min'`, `'med'`, `'max'`.
+| Category | Rebook Ratio | Description |
+|-----------|---------------|-------------|
+| `"min"` | 0.0 | No rebooking — cancelled appointments are lost. |
+| `"med"` | 0.5 | 50% of cancelled appointments are rescheduled (balanced). |
+| `"max"` | 1.0 | All cancelled appointments are rebooked. |
 
-### Behavior
-When an appointment is cancelled or missed, a rebooking probability is applied based on the selected category.  
-Rebooked slots are placed later in the simulation window, following realistic temporal and behavioral rules.
+Internally, the `rebook_category` determines the numeric **`rebook_ratio`**, used to decide probabilistically whether a cancelled slot is replaced with a new booking attempt.
 
-This ensures plausible continuity in care delivery — for example, some patients reschedule promptly after a cancellation, while others drop out of the schedule.
+### Validation rules
+- Must be one of `"min"`, `"med"`, or `"max"`.  
+- Invalid strings raise a `ValueError`.  
+- The corresponding numeric `rebook_ratio` is set automatically:
+  ```python
+  {"min": 0.0, "med": 0.5, "max": 1.0}
+  ```
 
-### Example
+### How it works
+When a cancellation occurs, the scheduler applies the `rebook_ratio` to determine if the appointment is rebooked.  
+For example, with `"med"`, half of all cancelled appointments are recycled into new future bookings.  
+This process preserves overall appointment volume and prevents an unrealistic decline in utilization.
 
+The rebooking mechanism is applied only to **cancelled appointments** (not DNAs).  
+Rescheduled cases are assigned a new date based on availability and the original patient’s booking behavior.
+
+This approach helps maintain continuity in simulated appointment flow and reproduces the adaptive behavior seen in real outpatient systems.
+
+### Examples
+
+**Disable rebooking completely**
 ```python
 from medscheduler import AppointmentScheduler
 
-# High rebooking scenario (all cancellations rebooked)
-scheduler = AppointmentScheduler(rebook_category="max")
-scheduler.generate()
+sched = AppointmentScheduler(rebook_category="min")
+sched.generate()
+```
+
+**Allow all cancellations to be rebooked**
+```python
+sched = AppointmentScheduler(rebook_category="max")
+sched.generate()
+```
+
+**Default (balanced rebooking at 50%)**
+```python
+sched = AppointmentScheduler()  # rebook_category="med"
 ```
 
 ---
 
-## Simulation impact
+### References
 
-- Higher **`attended`** and **`rebook_category="max"`** increase total appointment volume and reduce wasted slots.  
-- High **`cancelled`** or **`did not attend`** rates simulate less efficient systems.  
-- Combined with **`fill_rate`**, these parameters determine **effective utilization** and **attendance KPIs** in the generated dataset.
-
----
-
-## References
-
-- NHS Digital. *Hospital Outpatient Activity, 2023–24 (Workbook; Hospital Episode Statistics).*  
-  [https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
-
-- Ellis, D. A., & Jenkins, R. (2012). *Weekday affects attendance rate for medical appointments: Large-scale data analysis and implications.*  
-  *PLOS ONE, 7*(12), e51365. [https://doi.org/10.1371/journal.pone.0051365](https://doi.org/10.1371/journal.pone.0051365)
+NHS England (2024). *Hospital Outpatient Activity 2023–24: Summary Report 1.*  
+[https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
 
 ---
 
-## See also
+### Next steps
 
-- {doc}`booking_dynamics` – controls how far ahead and how fully appointments are scheduled.  
-- {doc}`visits_per_year` – defines the average number of visits per patient per year.
+- {doc}`booking_dynamics` – explains how slots are filled and how far ahead appointments are booked.  
+- {doc}`seasonality_weights` – shows how seasonal and weekday weights influence slot utilization.  
+- {doc}`calendar_structure` – defines the temporal grid of working days and hours.
