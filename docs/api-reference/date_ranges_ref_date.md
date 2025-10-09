@@ -8,7 +8,7 @@ The parameters **`date_ranges`** and **`ref_date`** jointly define the simulatio
 
 `date_ranges` defines the calendar span(s) during which appointment slots exist. Each tuple represents a continuous block of valid dates. Multiple non-contiguous ranges can be used to simulate seasonal or intermittent activity periods, such as academic terms or clinics that close during holidays.
 
-### Format and rules
+### Format
 
 **Type:** list of tuples `(start, end)`  
 **Default:** `[('2024-01-01 00:00', '2024-12-31 23:59')]`  
@@ -75,7 +75,7 @@ sched = AppointmentScheduler(
 
 The `ref_date` parameter defines the simulation’s reference point—the “today” from which past and future appointments are interpreted. It divides the dataset into historical and future segments, serving as the anchor for booking horizons, appointment allocation, and attendance outcomes.
 
-### Format and rules
+### Format
 
 **Type:** single date-like value  
 **Default:** `2024-12-01 00:00` (used when both `date_ranges` and `ref_date` parameters are omitted).
