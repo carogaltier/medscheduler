@@ -140,6 +140,7 @@ sched = AppointmentScheduler(appointments_per_hour=2)
 
 ### Next steps
 
-- {doc}`booking_dynamics` – explore how fill rate and booking horizon determine slot utilization.  
-- {doc}`seasonality_weights` – see how monthly and weekday weights affect slot distribution.
+- {doc}`seasonality_weights` — applies monthly and weekday weighting to the base calendar structure.  
+- {doc}`booking_dynamics` — models how slots are filled over time given the configured calendar.
+
 
