@@ -101,8 +101,8 @@ Example output:
 
 ---
 
-## Next steps
+### Next steps
 
-- {doc}`appointments_table` – explains how booked appointments are created and linked to slots.  
-- {doc}`patients_table` – details the demographic population associated with appointments.
+- {doc}`patients_table` — presents the registry of simulated individuals who occupy the generated slots.  
+- {doc}`custom_columns` — shows how to extend patient records with additional synthetic attributes.
 
