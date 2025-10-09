@@ -147,6 +147,6 @@ sched.generate()
 
 ### Next steps
 
-- {doc}`date_ranges_ref_date` – explains reference dates and effective calendar windows.  
-- {doc}`seasonality_weights` – details monthly and weekday weight adjustments.  
-- {doc}`calendar_structure` – defines the working-day, hour, and slot configuration.
+- {doc}`attendance_behavior` — details how booked appointments are assigned outcomes and rebooked when missed.  
+- {doc}`appointment_timing` — describes how real-world timing (arrival, start, duration) is simulated for attended visits.
+
