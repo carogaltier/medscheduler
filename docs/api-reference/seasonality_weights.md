@@ -153,6 +153,7 @@ PLoS ONE, 7(12), e51365. [https://doi.org/10.1371/journal.pone.0051365](https://
 
 ### Next steps
 
-- {doc}`calendar_structure` – defines the baseline calendar (days, hours, density).  
-- {doc}`booking_dynamics` – explore how fill rate and booking horizon determine slot utilization.
+- {doc}`booking_dynamics` — shows how fill rate and booking behavior interact with seasonal weighting.  
+- {doc}`randomness_and_noise` — explains how stochastic noise influences the variability of weighted distributions.
+
 
