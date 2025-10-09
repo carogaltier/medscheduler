@@ -153,7 +153,6 @@ PLoS ONE, 7(12), e51365. [https://doi.org/10.1371/journal.pone.0051365](https://
 
 ### Next steps
 
-- {doc}`date_ranges_ref_date` – explains reference dates and effective calendar windows.
 - {doc}`calendar_structure` – defines the baseline calendar (days, hours, density).  
 - {doc}`booking_dynamics` – explore how fill rate and booking horizon determine slot utilization.
 
