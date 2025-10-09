@@ -109,8 +109,7 @@ print(appointments)
 
 ---
 
-## Next steps
+### Next steps
 
-- {doc}`patients_table` – explains the patient registry linked via `patient_id`.  
-- {doc}`slots_table` – describes the structure and logic of generated slots.  
-- {doc}`booking_dynamics` – details how appointments are temporally distributed.
+- {doc}`slots_table` — details the structure of the calendar capacity where each appointment is scheduled.  
+- {doc}`patients_table` — explains how individual patients are linked to their appointments and demographic attributes.
