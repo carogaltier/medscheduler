@@ -152,8 +152,8 @@ PLoS ONE, 7(12), e51365. [https://doi.org/10.1371/journal.pone.0051365](https://
 ---
 
 ### Next steps
-
-- {doc}`booking_dynamics` — shows how fill rate and booking behavior interact with seasonal weighting.  
-- {doc}`randomness_and_noise` — explains how stochastic noise influences the variability of weighted distributions.
+- Discover how these weights influence booking probabilities in {doc}`booking_dynamics`.  
+- Learn how random variability modifies these patterns in {doc}`randomness_and_noise`.  
+- You may also explore {doc}`calendar_structure` to revisit how slots are initially distributed.
 
 
