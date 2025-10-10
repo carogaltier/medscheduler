@@ -122,10 +122,10 @@ This behavior ensures that pediatric cases are not simulated unless explicitly a
 [https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
 
 ---
-
 ### Next steps
+- Explore {doc}`appointment_timing` to learn how punctuality and durations vary across demographics.  
+- Review {doc}`patients_table` to examine how demographic attributes are embedded.  
+- See {doc}`patient_flow` for how demographics interact with visit frequency and first attendances.
 
-- {doc}`appointment_timing` — details how punctuality and consultation duration are simulated for attended patients.  
-- {doc}`patients_table` — shows how demographic attributes are represented in the generated patient registry.
 
 
