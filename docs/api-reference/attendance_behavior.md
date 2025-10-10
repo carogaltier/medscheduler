@@ -135,9 +135,9 @@ sched = AppointmentScheduler()  # rebook_category="med"
 [https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
 
 ---
-
 ### Next steps
+- Continue to {doc}`patient_flow` to study how attendance influences visit frequency and new-patient ratios.  
+- Examine {doc}`appointments_table` to see how these outcomes are stored in the final dataset.  
+- For related parameters, see {doc}`booking_dynamics` and {doc}`appointment_timing`.
 
-- {doc}`patient_flow` — explains how attendance patterns influence visit frequency and first-attendance ratios.  
-- {doc}`appointments_table` — shows how appointment outcomes are represented in the main output table.
 
