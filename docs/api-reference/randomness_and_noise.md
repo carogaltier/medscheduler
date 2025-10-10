@@ -105,8 +105,8 @@ sched = AppointmentScheduler(seed=None, noise=0.3)
 ---
 
 ### Next steps
-
-- {doc}`appointments_table` — shows how stochastic variability influences the generated appointment outcomes.  
-- {doc}`custom_columns` — demonstrates how the same noise parameter applies when sampling user-defined categorical columns.
+- Explore {doc}`appointments_table` to observe how random variation affects outcomes and scheduling.  
+- See {doc}`custom_columns` for how the same noise parameter applies to user-defined categorical data.  
+- You can also revisit {doc}`patient_demographics` to understand how noise shapes sampling distributions.
 
 
