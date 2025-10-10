@@ -102,8 +102,8 @@ print(appointments.head())
 ---
 
 ### Next steps
-
-- {doc}`date_ranges_ref_date` — defines the temporal window and reference point of the simulation.  
-- {doc}`calendar_structure` — details the working-day patterns and slot configuration used during generation.
+- Learn how temporal boundaries are defined in {doc}`date_ranges_ref_date`.  
+- Review {doc}`calendar_structure` to understand how working days, hours, and slot density are configured.  
+- For dataset customization, see also {doc}`booking_dynamics` and {doc}`seasonality_weights`.
 
 
