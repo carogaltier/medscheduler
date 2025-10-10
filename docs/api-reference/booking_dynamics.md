@@ -146,7 +146,8 @@ sched.generate()
 ---
 
 ### Next steps
+- Examine {doc}`attendance_behavior` to understand how booked slots translate into appointment outcomes.  
+- Explore {doc}`appointment_timing` for details on punctuality and in-clinic time simulation.  
+- Review {doc}`seasonality_weights` to see how seasonality interacts with fill rate and lead time.
 
-- {doc}`attendance_behavior` — details how booked appointments are assigned outcomes and rebooked when missed.  
-- {doc}`appointment_timing` — describes how real-world timing (arrival, start, duration) is simulated for attended visits.
 
