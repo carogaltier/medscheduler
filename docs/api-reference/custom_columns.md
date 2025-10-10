@@ -130,6 +130,6 @@ Each column is generated deterministically under the same random `seed`, ensurin
 ---
 
 ### Next steps
-
-- {doc}`patients_table` — provides the base structure where custom columns are added.  
-- {doc}`randomness_and_noise` — explains how stochastic noise influences the sampling of custom categorical distributions.
+- Review {doc}`patients_table` to examine the base table where new columns are added.  
+- Explore {doc}`slots_table` to see how patient-level extensions integrate with scheduling data.  
+- Learn more in {doc}`randomness_and_noise` about how sampling variability affects these custom features.
