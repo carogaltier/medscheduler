@@ -4,6 +4,10 @@ After running the `.generate()` method, **medscheduler** produces three intercon
 together simulate an outpatient scheduling system. Each output is returned as a pandas DataFrame and
 can optionally be exported to CSV files for portability.
 
+- **Appointments** is the primary dataset and usually sufficient for analysis.  
+- **Slots** enables capacity and utilization studies.  
+- **Patients** provides demographic context and can be linked to appointments for richer analysis.  
+
 ---
 
 ## 1. Appointments (primary output)
@@ -67,10 +71,5 @@ Demographics are generated using age–sex distributions derived from NHS data, 
 
 ---
 
-## Summary
-
-- **Appointments** is the primary dataset and usually sufficient for analysis.  
-- **Slots** enables capacity and utilization studies.  
-- **Patients** provides demographic context and can be linked to appointments for richer analysis.  
-
-For advanced configuration of how these tables are generated, continue to the {doc}`customization_options` section.
+## Next Steps
+- For advanced configuration of how these tables are generated, continue to the {doc}`customization_options` section.
