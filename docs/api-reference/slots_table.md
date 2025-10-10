@@ -102,7 +102,7 @@ Example output:
 ---
 
 ### Next steps
-
-- {doc}`patients_table` — presents the registry of simulated individuals who occupy the generated slots.  
-- {doc}`custom_columns` — shows how to extend patient records with additional synthetic attributes.
+- Review {doc}`patients_table` to see who occupies generated slots.  
+- Learn how to extend patient records with new variables in {doc}`custom_columns`.  
+- Explore {doc}`appointments_table` to connect slot capacity with scheduled visits.
 
