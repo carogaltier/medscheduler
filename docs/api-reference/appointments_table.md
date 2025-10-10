@@ -110,6 +110,6 @@ print(appointments)
 ---
 
 ### Next steps
-
-- {doc}`slots_table` — details the structure of the calendar capacity where each appointment is scheduled.  
-- {doc}`patients_table` — explains how individual patients are linked to their appointments and demographic attributes.
+- Explore {doc}`slots_table` to see how appointments map to available calendar slots.  
+- Review {doc}`patients_table` to understand how appointments link to individual patients.  
+- For further customization, see {doc}`randomness_and_noise` and {doc}`attendance_behavior`.
