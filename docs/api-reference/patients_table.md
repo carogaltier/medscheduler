@@ -140,6 +140,6 @@ Example output:
 ---
 
 ### Next steps
-
-- {doc}`custom_columns` — describes how to enrich the patient registry with new categorical variables or attributes.  
-- {doc}`appointments_table` — illustrates how patient identifiers link to scheduled appointments.
+- Discover how to enrich the patient registry with synthetic fields in {doc}`custom_columns`.  
+- Explore {doc}`appointments_table` to see how patient IDs are linked to appointment records.  
+- For related logic, review {doc}`patient_demographics` and {doc}`patient_flow`.
