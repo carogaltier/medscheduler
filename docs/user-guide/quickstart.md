@@ -111,4 +111,4 @@ This produces three standalone CSV files ready for BI tools, teaching, or demo p
 - Explore {doc}`outputs_overview` for detailed descriptions of each table.  
 - Check {doc}`customization_options` to adjust attendance rates, rebooking, and punctuality.  
 - Visit {doc}`../visualization/index` to see how to plot distributions and capacity.  
-- Browse {doc}`../examples/index`` for applied scenarios such as attendance analysis and overbooking.  
+- Browse {doc}`../examples/index` for applied scenarios such as attendance analysis and overbooking.  
