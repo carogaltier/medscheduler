@@ -71,7 +71,9 @@ Demographics are generated using age–sex distributions derived from NHS data, 
 
 ---
 
-## Next Steps
-- For advanced configuration of how these tables are generated, continue to the {doc}`customization_options` section.
-- {doc}`../api-reference/appointments_table` — illustrates how patient identifiers link to scheduled appointments.
-- {doc}`../api-reference/patients_table` — provides the base structure where custom columns are added. 
+## Next steps
+
+- Continue to {doc}`customization_options` for advanced configuration options that control how these tables are generated.  
+- See {doc}`../api-reference/appointments_table` for a detailed description of the main appointments dataset.  
+- Explore {doc}`../api-reference/patients_table` to understand the structure of the synthetic patient registry.  
+- Learn more in {doc}`../api-reference/slots_table` about how the appointment calendar capacity is represented.
