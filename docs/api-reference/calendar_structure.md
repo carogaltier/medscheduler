@@ -139,8 +139,8 @@ sched = AppointmentScheduler(appointments_per_hour=2)
 ---
 
 ### Next steps
-
-- {doc}`seasonality_weights` — applies monthly and weekday weighting to the base calendar structure.  
-- {doc}`booking_dynamics` — models how slots are filled over time given the configured calendar.
+- Learn how seasonal trends are applied in {doc}`seasonality_weights`.  
+- Explore {doc}`booking_dynamics` to see how slot utilization evolves over time.  
+- For context, revisit {doc}`date_ranges_ref_date` to review temporal boundaries.
 
 
