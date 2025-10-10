@@ -72,8 +72,7 @@ Demographics are generated using age–sex distributions derived from NHS data, 
 ---
 
 ## Next steps
-
-- Continue to {doc}`customization_options` for advanced configuration options that control how these tables are generated.  
-- See {doc}`../api-reference/appointments_table` for a detailed description of the main appointments dataset.  
-- Explore {doc}`../api-reference/patients_table` to understand the structure of the synthetic patient registry.  
-- Learn more in {doc}`../api-reference/slots_table` about how the appointment calendar capacity is represented.
+- Continue to {doc}`customization_options` for detailed control of dataset generation.  
+- Examine {doc}`../api-reference/appointments_table` for the main analytical output.  
+- Review {doc}`../api-reference/patients_table` to understand how the synthetic population is structured.  
+- Explore {doc}`../api-reference/slots_table` for insights into scheduling capacity and utilization.  
