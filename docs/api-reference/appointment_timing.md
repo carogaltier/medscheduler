@@ -114,8 +114,8 @@ print(appointments[["appointment_date", "check_in_time", "start_time", "end_time
 ---
 
 ### Next steps
-
-- {doc}`appointments_table` — presents how timing and outcome variables are stored for each scheduled appointment.  
-- {doc}`randomness_and_noise` — explains how stochastic variation affects punctuality and duration distributions.
+- Examine {doc}`appointments_table` to understand how timing and outcome variables are stored.  
+- Review {doc}`randomness_and_noise` to see how variability is introduced into punctuality and durations.  
+- Explore {doc}`attendance_behavior` for how attendance outcomes affect start and end times.
 
 
