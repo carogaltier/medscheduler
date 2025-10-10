@@ -100,10 +100,9 @@ sched.generate()
 [https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx](https://files.digital.nhs.uk/34/18846B/hosp-epis-stat-outp-rep-tabs-2023-24-tab.xlsx)
 
 ---
-
 ### Next steps
-
-- {doc}`patient_demographics` — defines the age and sex distributions for the simulated patient population.  
-- {doc}`patients_table` — describes the structure of the patient registry generated from these visit patterns.
+- Explore {doc}`patient_demographics` to learn how age and sex distributions are derived.  
+- Review {doc}`patients_table` to understand how those demographic traits are represented.  
+- See also {doc}`attendance_behavior` to connect attendance outcomes with patient flow dynamics.
 
 
