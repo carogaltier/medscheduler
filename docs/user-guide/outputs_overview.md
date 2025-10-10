@@ -73,4 +73,5 @@ Demographics are generated using age–sex distributions derived from NHS data, 
 
 ## Next Steps
 - For advanced configuration of how these tables are generated, continue to the {doc}`customization_options` section.
--  {doc}`../api-reference/appointments_table` — illustrates how patient identifiers link to scheduled appointments.
+- {doc}`../api-reference/appointments_table` — illustrates how patient identifiers link to scheduled appointments.
+- {doc}`../api-reference/patients_table` — provides the base structure where custom columns are added. 
