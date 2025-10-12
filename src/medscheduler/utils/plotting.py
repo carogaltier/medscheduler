@@ -320,8 +320,8 @@ def _aggregate_until_fits(
 
 def _plot_stacked_bars(ax, x, top_vals, bottom_vals, annotate: bool):
     """Draw stacked bars for available vs non-available slots."""
-    bars1 = ax.bar(x, bottom_vals, label="Non-Available Slots", color="#FF6F61", zorder=3)
-    bars2 = ax.bar(x, top_vals, bottom=bottom_vals, label="Available Slots", color="#43AD7E", zorder=3)
+    bars1 = ax.bar(x, bottom_vals, label="Non-Available Slots", color=COLORS["unavailable"], zorder=3)
+    bars2 = ax.bar(x, top_vals, bottom=bottom_vals, label="Available Slots", color=COLORS["available"], zorder=3)
 
     if annotate:
         totals = (top_vals + bottom_vals)
@@ -563,7 +563,7 @@ def plot_monthly_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
     # Month names for x-axis labels
     month_names = [pd.Timestamp(month=m, day=1, year=2000).strftime("%B") for m in range(1, 13)]
     fig, ax = plt.subplots(figsize=(11, 5))
-    bars = ax.bar(month_names, month_counts.values, color="#67A7D4", zorder=3, width=0.5)
+    bars = ax.bar(month_names, month_counts.values, color=COLORS["primary"], zorder=3, width=0.5)
 
     # Title and labels
     ax.set_title("Appointment Distribution by Month", loc="left", fontsize=12, y=1.1, x=-0.08)
@@ -652,15 +652,8 @@ def plot_status_distribution_last_days(
     # --- Group by date and status
     grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
 
-    # --- Color mapping
-    color_map = {
-        "attended": "#B69DE1",
-        "cancelled": "#B3C1F2",
-        "did not attend": "#BDE3F0",
-        "unknown": "#E5E5E5"
-    }
     statuses = grouped.columns
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors  = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -773,13 +766,8 @@ def plot_status_distribution_next_days(
     column_order = ["scheduled", "cancelled"]
     grouped = grouped.reindex(columns=column_order, fill_value=0)
 
-    # --- Color mapping
-    color_map = {
-        "scheduled": "#CD77B6",
-        "cancelled": "#B3C1F2"
-    }
     statuses = grouped.columns
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors  = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -861,7 +849,7 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
 
     # Create plot
     fig, ax = plt.subplots(figsize=(7, 5))
-    bars = ax.bar(weekday_counts.index, weekday_counts.values, color="#f9a369", width=0.5, zorder=3)
+    bars = ax.bar(weekday_counts.index, weekday_counts.values, color=COLORS["secondary"], width=0.5, zorder=3)
 
     # Title and labels
     ax.set_title("Appointment Distribution by Weekday", loc="left", fontsize=12, y=1.08, x=-0.1)
@@ -950,8 +938,8 @@ def plot_population_pyramid(
     label_offset = len(df) / 500
     fontsize = 9
     age_groups = gender_counts.index
-    bar_color_male = "#4583b5"
-    bar_color_female = "#ef7a84"
+    bar_color_male = COLORS["male"]
+    bar_color_female = COLORS["female"]
 
     # --- Create figure
     fig, ax = plt.subplots(figsize=(9, 8))
@@ -1101,16 +1089,9 @@ def plot_appointments_by_status(
         * 100
     )
 
-    # --- Color mapping
-    color_map = {
-        "attended": "#B69DE1",
-        "cancelled": "#B3C1F2",
-        "did not attend": "#BDE3F0",
-        "unknown": "#E5E5E5"
-    }
     statuses = grouped.index
     percentages = grouped.values
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     fig, ax = plt.subplots(figsize=(5, 5))
@@ -1204,14 +1185,9 @@ def plot_appointments_by_status_future(
         * 100
     )
 
-    # --- Color mapping
-    color_map = {
-        "scheduled": "#CD77B6",
-        "cancelled": "#B3C1F2"
-    }
     statuses = grouped.index
     percentages = grouped.values
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     fig, ax = plt.subplots(figsize=(3, 5))
@@ -1304,15 +1280,8 @@ def plot_status_distribution_last_days(
     # --- Group by date and status
     grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
 
-    # --- Color mapping
-    color_map = {
-        "attended": "#B69DE1",
-        "cancelled": "#B3C1F2",
-        "did not attend": "#BDE3F0",
-        "unknown": "#E5E5E5"
-    }
     statuses = grouped.columns
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -1424,13 +1393,8 @@ def plot_status_distribution_next_days(
     column_order = ["scheduled", "cancelled"]
     grouped = grouped.reindex(columns=column_order, fill_value=0)
 
-    # --- Color mapping
-    color_map = {
-        "scheduled": "#CD77B6",
-        "cancelled": "#B3C1F2"
-    }
     statuses = grouped.columns
-    colors = [color_map.get(status, "#4583b5") for status in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -1542,7 +1506,7 @@ def plot_scheduling_interval_distribution(
     )
     ax.bar(
         valid_x, valid_counts, width=0.9, align="center",
-        edgecolor="#ffffff", color="#67A7D4", zorder=3
+        edgecolor="#ffffff", color=COLORS["primary"], zorder=3
     )
 
     # --- Axis labels and formatting
@@ -1634,7 +1598,7 @@ def plot_appointment_duration_distribution(df: pd.DataFrame) -> plt.Axes:
     ax.bar(
         valid_x, valid_counts,
         width=np.diff(edges)[:len(valid_x)], align="edge",
-        edgecolor="#ffffff", color="#67A7D4", zorder=3
+        edgecolor="#ffffff", color=COLORS["primary"], zorder=3
     )
 
     # --- Labels & ticks
@@ -1725,7 +1689,7 @@ def plot_waiting_time_distribution(df: pd.DataFrame) -> plt.Axes:
     ax.bar(
         valid_x, valid_counts,
         width=np.diff(edges)[:len(valid_x)], align="edge",
-        edgecolor="#ffffff", color="#67A7D4", zorder=3
+        edgecolor="#ffffff", color=COLORS["primary"], zorder=3
     )
 
     # --- Labels & ticks
@@ -1830,7 +1794,7 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
     valid_percentages = [pct for _, _, pct in valid_bins]
 
     # --- Bar colors (early = blue, late = orange)
-    bar_colors = ["#67A7D4" if x < 0 else "#f9a369" for x in valid_x]
+    bar_colors = [COLORS["primary"] if x < 0 else COLORS["secondary"] for x in valid_x]
 
     # --- Create plot
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -1861,8 +1825,8 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
     # --- Legend
     ax.legend(
         handles=[
-            patches.Patch(color="#67A7D4", label="Early Arrival"),
-            patches.Patch(color="#f9a369", label="Late Arrival")
+            patches.Patch(color=COLORS["primary"], label="Early Arrival"),
+            patches.Patch(color=COLORS["secondary"], label="Late Arrival")
         ],
         loc="upper right", frameon=False, fontsize=10,
         bbox_to_anchor=(1.02, 1.2),
