@@ -13,7 +13,7 @@ Displays historical **slot utilization** prior to the reference date (`ref_date`
 - `ref_date (str | pd.Timestamp | datetime, optional)` — Overrides the scheduler’s reference date.
 - `date_col (str)` — Column for appointment dates. Default: `"appointment_date"`.
 - `available_col (str)` — Boolean column for slot availability. Default: `"is_available"`.
-- `freq (str)` — Desired time aggregation: one of `Y`, `Q`, `M`, or `W`. Default: `"Y"`.
+- `freq (str)` — Desired time aggregation: one of `Y`, `Q`, `M`, or `W`. Default: `"Q"`.
 - `min_bar_px (int)` — Minimum horizontal pixels per bar. Used to decide auto-aggregation level.
 - `label_px_threshold (int)` — Pixel density threshold for enabling per-bar labels.
 - `min_fig_w_in`, `max_fig_w_in` (`float`) — Minimum/maximum figure width in inches.
