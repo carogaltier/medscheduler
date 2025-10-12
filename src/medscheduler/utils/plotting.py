@@ -238,6 +238,7 @@ def _empty_plot(message: str = "Nothing to show") -> plt.Axes:
     ax.set_title(message)
     ax.text(0.5, 0.5, message, ha="center", va="center", fontsize=12)
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -420,6 +421,7 @@ def plot_past_slot_availability(
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     ax.spines[["right", "top"]].set_visible(False)
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -488,23 +490,8 @@ def plot_future_slot_availability(
         return _empty_plot("Too many bars for a readable chart at any granularity.")
 
     fig, ax = plt.subplots(figsize=figsize, dpi=dpi)
-    def _to_1d(g, key, idx):
-        try:
-            obj = g.get(key)
-        except Exception:
-            obj = None
-        if obj is None:
-            s = pd.Series(0.0, index=idx)
-        elif isinstance(obj, pd.DataFrame):
-            s = obj.sum(axis=1).astype(float)
-        else:
-            s = pd.Series(obj, index=getattr(obj, "index", idx)).astype(float)
-        if not s.index.equals(idx):
-            s = s.reindex(idx, fill_value=0.0)
-        return s.to_numpy(dtype=float)
-
-    available = _to_1d(grouped, True, periods)
-    non_available = _to_1d(grouped, False, periods)
+    available = _extract_group_1d(grouped, True, periods)
+    non_available = _extract_group_1d(grouped, False, periods)
 
     x = range(n)
     annotate = _should_annotate_labels(
@@ -528,6 +515,7 @@ def plot_future_slot_availability(
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     ax.spines[["right", "top"]].set_visible(False)
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -588,6 +576,7 @@ def plot_monthly_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -699,6 +688,7 @@ def plot_status_distribution_last_days(
     ax.set_xlim(xmin + 0.75, xmax - 0.75)
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 # ---------------------------------------------------------------
@@ -811,6 +801,7 @@ def plot_status_distribution_next_days(
     ax.set_xlim(xmin + 0.5, xmax - 0.5)
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -873,6 +864,7 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
             ha="center", fontsize=9, fontweight="bold", color=COLORS["text"]
         )
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 # ---------------------------------------------------------------
@@ -1027,6 +1019,7 @@ def plot_population_pyramid(
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -1119,6 +1112,7 @@ def plot_appointments_by_status(
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -1215,6 +1209,7 @@ def plot_appointments_by_status_future(
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -1307,6 +1302,7 @@ def plot_scheduling_interval_distribution(
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -1399,6 +1395,7 @@ def plot_appointment_duration_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 
@@ -1492,6 +1489,7 @@ def plot_waiting_time_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 # ---------------------------------------------------------------
@@ -1621,6 +1619,7 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
+    plt.close(fig)
     return ax
 
 def _extract_group_1d(grouped: Any, key: Any, periods: Sequence) -> np.ndarray:
