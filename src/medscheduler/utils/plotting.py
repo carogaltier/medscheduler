@@ -11,21 +11,28 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional, Union, Tuple, List, Sequence
 
 
-BASE_COLORS = {
-    "primary": "#67A7D4",
-    "secondary": "#f9a369",
-}
+# ==== Unified color palette for all plots ====
+COLORS = {
+    # base
+    "primary":   "#67A7D4",
+    "secondary": "#F9A369",
+    "grid":      "#E5E7EB",
+    "text":      "#222222",
 
-STATUS_COLORS = {
-    "available": "43AD7E",
-    "not available": "FF6F61",
-    "male": "#4583b5",
-    "female": "#ef7a84",
-    "attended": "#B69DE1",
+    # availability
+    "available":   "#43AD7E",
+    "unavailable": "#FF6F61",
+
+    # demographics
+    "male":   "#4583B5",
+    "female": "#EF7A84",
+
+    # status
+    "attended":  "#B69DE1",
     "cancelled": "#B3C1F2",
-    "did not attend": "#BDE3F0",
-    "unknown": "#E5E5E5",
-    "scheduled": "#CD77B6"
+    "did not attend": "#BDE3F0", 
+    "unknown":   "#E5E5E5",
+    "scheduled": "#CD77B6",
 }
 
 @dataclass(frozen=True)
