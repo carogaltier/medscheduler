@@ -354,6 +354,31 @@ def _should_annotate_labels(
     pixels_per_bar = (fig_width_in * dpi) / float(n_bars)
     return pixels_per_bar >= float(label_px_threshold)
 
+def _extract_group_1d(grouped: Any, key: Any, periods: Sequence) -> np.ndarray:
+    """
+    Return a 1D vector of length len(periods) for the requested key.
+
+    Behavior
+    --------
+    - If the key is missing → return a zero vector.
+    - If the value is a DataFrame with multiple columns → sum rows (axis=1).
+    - Always align the result to 'periods' as the index before returning.
+    """
+    try:
+        obj = grouped.get(key)
+    except Exception:
+        obj = None
+
+    if obj is None:
+        s = pd.Series(0.0, index=pd.Index(periods))
+    elif isinstance(obj, pd.DataFrame):
+        s = obj.sum(axis=1).astype(float)
+    else:
+        s = pd.Series(obj, index=getattr(obj, "index", pd.Index(periods))).astype(float)
+
+    if not s.index.equals(pd.Index(periods)):
+        s = s.reindex(periods, fill_value=0.0)
+    return s.to_numpy(dtype=float)
 
 # ============================================================
 # Slot Availability (Past)
@@ -366,7 +391,7 @@ def plot_past_slot_availability(
     ref_date: Optional[Union[str, pd.Timestamp, datetime]] = None,
     date_col: str = "appointment_date",
     available_col: str = "is_available",
-    freq: str = "Q",
+    freq: str = "Y",
     min_bar_px: int = 55,
     label_px_threshold: int = 55,
     min_fig_w_in: float = 7.0,
@@ -1622,28 +1647,4 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
     plt.close(fig)
     return ax
 
-def _extract_group_1d(grouped: Any, key: Any, periods: Sequence) -> np.ndarray:
-    """
-    Return a 1D vector of length len(periods) for the requested key.
 
-    Behavior
-    --------
-    - If the key is missing → return a zero vector.
-    - If the value is a DataFrame with multiple columns → sum rows (axis=1).
-    - Always align the result to 'periods' as the index before returning.
-    """
-    try:
-        obj = grouped.get(key)
-    except Exception:
-        obj = None
-
-    if obj is None:
-        s = pd.Series(0.0, index=pd.Index(periods))
-    elif isinstance(obj, pd.DataFrame):
-        s = obj.sum(axis=1).astype(float)
-    else:
-        s = pd.Series(obj, index=getattr(obj, "index", pd.Index(periods))).astype(float)
-
-    if not s.index.equals(pd.Index(periods)):
-        s = s.reindex(periods, fill_value=0.0)
-    return s.to_numpy(dtype=float)
