@@ -320,7 +320,7 @@ def _aggregate_until_fits(
 
 def _plot_stacked_bars(ax, x, top_vals, bottom_vals, annotate: bool):
     """Draw stacked bars for available vs non-available slots."""
-    bars1 = ax.bar(x, bottom_vals, label="Non-Available Slots", color=COLORS["unavailable"], zorder=3)
+    bars1 = ax.bar(x, bottom_vals, label="Unavailable Slots", color=COLORS["unavailable"], zorder=3)
     bars2 = ax.bar(x, top_vals, bottom=bottom_vals, label="Available Slots", color=COLORS["available"], zorder=3)
 
     if annotate:
@@ -583,7 +583,7 @@ def plot_monthly_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + 0.25,
             f"{pct:.1f}%",
-            ha="center", fontsize=9, fontweight="bold", color="#222"
+            ha="center", fontsize=9, fontweight="bold", color=COLORS["text"]
         )
 
     fig.tight_layout()
@@ -675,7 +675,7 @@ def plot_status_distribution_last_days(
         ax.text(
             date, total + 0.6, str(total),
             ha="center", va="bottom", fontsize=9,
-            color="#222", fontweight="bold"
+            color=COLORS["text"], fontweight="bold"
         )
 
     # --- Titles and labels
@@ -789,7 +789,7 @@ def plot_status_distribution_next_days(
         ax.text(
             date, total + 0.4, str(total),
             ha="center", va="bottom", fontsize=9,
-            color="#222", fontweight="bold"
+            color=COLORS["text"], fontweight="bold"
         )
 
     # --- Titles and labels
@@ -870,7 +870,7 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + 0.7,
             f"{pct:.1f}%",
-            ha="center", fontsize=9, fontweight="bold", color="#222"
+            ha="center", fontsize=9, fontweight="bold", color=COLORS["text"]
         )
     fig.tight_layout()
     return ax
@@ -1115,7 +1115,7 @@ def plot_appointments_by_status(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + 2,
             f"{percent:.1f}%",
-            ha="center", fontsize=9, color="#222", fontweight="bold"
+            ha="center", fontsize=9, color=COLORS["text"], fontweight="bold"
         )
 
     fig.tight_layout()
@@ -1211,7 +1211,7 @@ def plot_appointments_by_status_future(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + 2,
             f"{percent:.1f}%",
-            ha="center", fontsize=9, color="#222", fontweight="bold"
+            ha="center", fontsize=9, color=COLORS["text"], fontweight="bold"
         )
 
     fig.tight_layout()
@@ -1303,7 +1303,7 @@ def plot_status_distribution_last_days(
         ax.text(
             date, total + 0.6, str(total),
             ha="center", va="bottom", fontsize=9,
-            color="#222", fontweight="bold"
+            color=COLORS["text"], fontweight="bold"
         )
 
     # --- Titles and labels
@@ -1416,7 +1416,7 @@ def plot_status_distribution_next_days(
         ax.text(
             date, total + 0.4, str(total),
             ha="center", va="bottom", fontsize=9,
-            color="#222", fontweight="bold"
+            color=COLORS["text"], fontweight="bold"
         )
 
     # --- Titles and labels
@@ -1526,7 +1526,7 @@ def plot_scheduling_interval_distribution(
         ax.text(
             x, count + (max(valid_counts) * 0.025),
             f"{pct:.1f}%", fontsize=9, fontweight="bold",
-            color="#222", ha="center"
+            color=COLORS["text"], ha="center"
         )
 
     fig.tight_layout()
@@ -1618,7 +1618,7 @@ def plot_appointment_duration_distribution(df: pd.DataFrame) -> plt.Axes:
             count + (max(valid_counts) * 0.02),
             f"{pct:.1f}%",
             fontsize=9, fontweight="bold",
-            color="#222", ha="center"
+            color=COLORS["text"], ha="center"
         )
 
     fig.tight_layout()
@@ -1711,7 +1711,7 @@ def plot_waiting_time_distribution(df: pd.DataFrame) -> plt.Axes:
             count + (max(valid_counts) * 0.025),
             f"{pct:.1f}%",
             fontsize=9, fontweight="bold",
-            color="#222", ha="center"
+            color=COLORS["text"], ha="center"
         )
 
     fig.tight_layout()
@@ -1810,7 +1810,7 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
     )
 
     # --- Vertical reference line at 0 (on-time)
-    ax.axvline(0, color="#222", linestyle="--", linewidth=1.5, zorder=4)
+    ax.axvline(0, color=COLORS["text"], linestyle="--", linewidth=1.5, zorder=4)
 
     # --- Labels & ticks
     ax.set_xticks(bins)
@@ -1840,7 +1840,7 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
             x + (np.diff(edges)[0] / 2),
             count + (max(valid_counts) * 0.025),
             f"{pct:.1f}%",
-            fontsize=9, fontweight="bold", color="#222", ha="center"
+            fontsize=9, fontweight="bold", color=COLORS["text"], ha="center"
         )
 
     fig.tight_layout()
