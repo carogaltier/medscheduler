@@ -236,6 +236,7 @@ def _empty_plot(message: str = "Nothing to show") -> plt.Axes:
     fig, ax = plt.subplots(figsize=(6, 2))
     ax.axis("off")
     ax.set_title(message)
+    ax.text(0.5, 0.5, message, ha="center", va="center", fontsize=12)
     fig.tight_layout()
     return ax
 
@@ -631,10 +632,10 @@ def plot_status_distribution_last_days(
     required_cols = {date_col, status_col}
     missing_cols = required_cols - set(df.columns)
     if missing_cols:
-        raise ValueError(f"DataFrame must contain columns: {', '.join(missing_cols)}")
+        return _empty_plot(f"DataFrame must contain columns: {', '.join(missing_cols)}")
 
     if not hasattr(scheduler, "ref_date"):
-        raise ValueError("Scheduler must have a `ref_date` attribute.")
+        return _empty_plot("Scheduler must have a `ref_date` attribute.")
 
     # --- Ensure datetime type
     if not pd.api.types.is_datetime64_any_dtype(df[date_col]):
@@ -647,13 +648,13 @@ def plot_status_distribution_last_days(
     filtered_df = df.loc[mask]
 
     if filtered_df.empty:
-        return _empty_plot("No past data (before ref_date)")
+        return _empty_plot(f"No data available in the last {days_back} days before {ref_date.date()}.")
 
     # --- Group by date and status
     grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
 
     statuses = grouped.columns
-    colors  = [COLORS[s] for s in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -700,10 +701,8 @@ def plot_status_distribution_last_days(
     fig.tight_layout()
     return ax
 
-
-
 # ---------------------------------------------------------------
-# Plot: Daily Appointment Status Distribution (Next Days)
+# Plot: Daily Appointment Status Distribution (Next 30 Days)
 # ---------------------------------------------------------------
 def plot_status_distribution_next_days(
     df: pd.DataFrame,
@@ -767,7 +766,7 @@ def plot_status_distribution_next_days(
     grouped = grouped.reindex(columns=column_order, fill_value=0)
 
     statuses = grouped.columns
-    colors  = [COLORS[s] for s in statuses]
+    colors = [COLORS[s] for s in statuses]
 
     # --- Create plot
     dates = grouped.index
@@ -813,6 +812,7 @@ def plot_status_distribution_next_days(
 
     fig.tight_layout()
     return ax
+
 
 
 def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
@@ -1217,229 +1217,6 @@ def plot_appointments_by_status_future(
     fig.tight_layout()
     return ax
 
-
-# ---------------------------------------------------------------
-# Plot: Daily Appointment Status Distribution last days
-# ---------------------------------------------------------------
-def plot_status_distribution_last_days(
-    df: pd.DataFrame,
-    *,
-    scheduler: object,
-    days_back: int = 30,
-    date_col: str = "appointment_date",
-    status_col: str = "status"
-) -> plt.Axes:
-    """
-    Plot the daily distribution of appointment statuses for the last N days.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        DataFrame containing at least `date_col` and `status_col`.
-    scheduler : object
-        Scheduler instance providing a `ref_date` attribute.
-    days_back : int, default=30
-        Number of days before `ref_date` to include in the plot.
-    date_col : str, default="appointment_date"
-        Column name containing appointment dates.
-    status_col : str, default="status"
-        Column name containing appointment statuses.
-
-    Returns
-    -------
-    plt.Axes
-        Matplotlib Axes object for the generated plot.
-
-    Raises
-    ------
-    ValueError
-        If required columns are missing or scheduler does not have `ref_date`.
-    """
-    # --- Column validation
-    required_cols = {date_col, status_col}
-    missing_cols = required_cols - set(df.columns)
-    if missing_cols:
-        return _empty_plot(f"DataFrame must contain columns: {', '.join(missing_cols)}")
-
-    if not hasattr(scheduler, "ref_date"):
-        return _empty_plot("Scheduler must have a `ref_date` attribute.")
-
-    # --- Ensure datetime type
-    if not pd.api.types.is_datetime64_any_dtype(df[date_col]):
-        df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
-
-    # --- Filter last N days before ref_date
-    ref_date = pd.to_datetime(scheduler.ref_date).normalize()
-    start_date = ref_date - pd.Timedelta(days=days_back)
-    mask = (df[date_col] < ref_date) & (df[date_col] >= start_date)
-    filtered_df = df.loc[mask]
-
-    if filtered_df.empty:
-        return _empty_plot(f"No data available in the last {days_back} days before {ref_date.date()}.")
-
-    # --- Group by date and status
-    grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
-
-    statuses = grouped.columns
-    colors = [COLORS[s] for s in statuses]
-
-    # --- Create plot
-    dates = grouped.index
-    fig, ax = plt.subplots(figsize=(15, 7))
-
-    bottom_values = np.zeros(len(dates))
-    for status, color in zip(statuses, colors):
-        values = grouped[status]
-        ax.bar(
-            dates, values, bottom=bottom_values,
-            label=status.capitalize(), color=color,
-            edgecolor="#ffffff", zorder=3
-        )
-        bottom_values += values
-
-    # --- Total labels per date
-    total_per_date = grouped.sum(axis=1)
-    for date, total in zip(dates, total_per_date):
-        ax.text(
-            date, total + 0.6, str(total),
-            ha="center", va="bottom", fontsize=9,
-            color=COLORS["text"], fontweight="bold"
-        )
-
-    # --- Titles and labels
-    ax.set_title(
-        f"Appointments Status Distribution (Last {days_back} Days)",
-        loc="left", fontsize=12, y=1.27, x=-0.04
-    )
-    ax.set_xlabel("Date", labelpad=10, fontsize=10.5)
-    ax.set_ylabel("Number of Appointments", labelpad=10, fontsize=10.5)
-    ax.legend(loc="upper right", bbox_to_anchor=(1.01, 1.3), frameon=False)
-
-    # --- X-axis formatting
-    ax.set_xticks(dates)
-    ax.set_xticklabels(dates.strftime("%Y-%m-%d"), rotation=45, ha="right")
-
-    # --- Style adjustments
-    ax.spines[["right", "top"]].set_visible(False)
-    ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
-    xmin, xmax = ax.get_xlim()
-    ax.set_xlim(xmin + 0.75, xmax - 0.75)
-
-    fig.tight_layout()
-    return ax
-
-
-# ---------------------------------------------------------------
-# Plot: Daily Appointment Status Distribution (Next 30 Days)
-# ---------------------------------------------------------------
-def plot_status_distribution_next_days(
-    df: pd.DataFrame,
-    *,
-    scheduler: object,
-    days_ahead: int = 30,
-    date_col: str = "appointment_date",
-    status_col: str = "status"
-) -> plt.Axes:
-    """
-    Plot the daily distribution of appointment statuses for the next N days.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        DataFrame containing at least `date_col` and `status_col`.
-    scheduler : object
-        Scheduler instance providing a `ref_date` attribute.
-    days_ahead : int, default=30
-        Number of days after `ref_date` to include in the plot.
-    date_col : str, default="appointment_date"
-        Column name containing appointment dates.
-    status_col : str, default="status"
-        Column name containing appointment statuses.
-
-    Returns
-    -------
-    plt.Axes
-        Matplotlib Axes object for the generated plot.
-
-    Raises
-    ------
-    ValueError
-        If required columns are missing or scheduler does not have `ref_date`.
-    """
-    # --- Column validation
-    required_cols = {date_col, status_col}
-    missing_cols = required_cols - set(df.columns)
-    if missing_cols:
-        raise ValueError(f"DataFrame must contain columns: {', '.join(missing_cols)}")
-
-    if not hasattr(scheduler, "ref_date"):
-        raise ValueError("Scheduler must have a `ref_date` attribute.")
-
-    # --- Ensure datetime type
-    if not pd.api.types.is_datetime64_any_dtype(df[date_col]):
-        df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
-
-    # --- Filter next N days from ref_date
-    ref_date = pd.to_datetime(scheduler.ref_date).normalize()
-    end_date = ref_date + pd.Timedelta(days=days_ahead)
-    mask = (df[date_col] >= ref_date) & (df[date_col] < end_date)
-    filtered_df = df.loc[mask]
-
-    if filtered_df.empty:
-        return _empty_plot(f"No data available in the next {days_ahead} days after {ref_date.date()}.")
-
-    # --- Group and ensure column order
-    grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
-    column_order = ["scheduled", "cancelled"]
-    grouped = grouped.reindex(columns=column_order, fill_value=0)
-
-    statuses = grouped.columns
-    colors = [COLORS[s] for s in statuses]
-
-    # --- Create plot
-    dates = grouped.index
-    fig, ax = plt.subplots(figsize=(14, 6))
-
-    bottom_values = np.zeros(len(dates))
-    for status, color in zip(statuses, colors):
-        values = grouped[status]
-        ax.bar(
-            dates, values, bottom=bottom_values,
-            label=status.capitalize(), color=color,
-            edgecolor="#ffffff", zorder=3
-        )
-        bottom_values += values
-
-    # --- Total labels per date
-    total_per_date = grouped.sum(axis=1)
-    for date, total in zip(dates, total_per_date):
-        ax.text(
-            date, total + 0.4, str(total),
-            ha="center", va="bottom", fontsize=9,
-            color=COLORS["text"], fontweight="bold"
-        )
-
-    # --- Titles and labels
-    ax.set_title(
-        f"Appointments Status Distribution (Next {days_ahead} Days)",
-        loc="left", fontsize=12, y=1.09, x=-0.04
-    )
-    ax.set_xlabel("Date", labelpad=10, fontsize=10.5)
-    ax.set_ylabel("Number of Appointments", labelpad=10, fontsize=10.5)
-    ax.legend(loc="upper right", bbox_to_anchor=(1, 1.1), frameon=False)
-
-    # --- X-axis formatting
-    ax.set_xticks(dates)
-    ax.set_xticklabels(dates.strftime("%Y-%m-%d"), rotation=45, ha="right")
-
-    # --- Style adjustments
-    ax.spines[["right", "top"]].set_visible(False)
-    ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
-    xmin, xmax = ax.get_xlim()
-    ax.set_xlim(xmin + 0.5, xmax - 0.5)
-
-    fig.tight_layout()
-    return ax
 
 # ---------------------------------------------------------------
 # Plot: Scheduling Interval Distribution
