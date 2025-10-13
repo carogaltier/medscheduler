@@ -56,8 +56,9 @@ ax.figure.show()  # optional in interactive sessions
 ---
 
 ## Next Steps
-- Explore patient demographic generation parameters: {doc}`../api-reference/patient_demographics`  
-- Review patient flow and first attendance logic: {doc}`../api-reference/patient_flow`  
-- Learn how population attributes affect attendance and rebooking rates: {doc}`../api-reference/attendance_behavior`  
+- Explore patient demographic generation parameters: {doc}`../api-reference/patient_demographics`
+- Review patient flow and attendance logic: {doc}`../api-reference/patient_flow`
+- Analyze appointment outcomes by status: {doc}`../visualization/plot_appointments_by_status`
 - Adjust demographic distributions via customization options: {doc}`../user-guide/customization_options`
+
 
