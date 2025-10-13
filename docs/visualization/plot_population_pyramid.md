@@ -52,6 +52,10 @@ slots_df, appts_df, patients_df = sched.generate()
 ax = plot_population_pyramid(appts_df)
 ax.figure.show()  # optional in interactive sessions
 ```
+**Output preview:**  
+The figure below presents a population pyramid showing the age and sex distribution of the simulated patient cohort. Male and female groups are displayed symmetrically to highlight demographic balance across age categories.
+
+![Population Pyramid](../_static/visuals/plot_population_pyramid.png)
 
 ---
 
