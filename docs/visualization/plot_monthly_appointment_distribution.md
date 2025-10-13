@@ -47,8 +47,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Explore seasonality weighting parameters: {doc}`../api-reference/seasonality_weights`
-- Learn how appointment timing is determined: {doc}`../api-reference/appointment_timing`
-- Review the main appointments table structure: {doc}`../api-reference/appointments_table`
-- Adjust generation parameters for realistic temporal patterns: {doc}`../user-guide/customization_options`
+- Compare monthly vs. weekday trends: {doc}`../visualization/plot_weekday_appointment_distribution`
+- Explore seasonal weighting factors: {doc}`../api-reference/seasonality_weights`
+- Learn how appointment timing is generated: {doc}`../api-reference/appointment_timing`
+- Adjust generation parameters via customization options: {doc}`../user-guide/customization_options`
+
 
