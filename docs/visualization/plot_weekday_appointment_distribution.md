@@ -43,7 +43,10 @@ slots_df, appts_df, patients_df = sched.generate()
 ax = plot_weekday_appointment_distribution(appts_df)
 ax.figure.show()  # optional when running interactively
 ```
+**Output preview:**  
+The bar chart below depicts the percentage distribution of appointments across weekdays. It highlights which days of the week have the highest and lowest scheduling activity within the simulated dataset.
 
+![Weekday Appointment Distribution](../_static/visuals/plot_weekday_appointment_distribution.png)
 ---
 
 ## Next Steps
