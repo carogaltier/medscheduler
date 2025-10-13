@@ -44,6 +44,11 @@ ax = plot_monthly_appointment_distribution(appts_df)
 ax.figure.show()  # optional when running interactively
 ```
 
+**Output preview:**  
+The bar chart below displays the monthly distribution of appointment activity across the simulated period, expressed as the percentage of total appointments per month.
+
+![Monthly Appointment Distribution](../_static/visuals/plot_monthly_appointment_distribution.png)
+
 ---
 
 ## Next Steps
