@@ -321,21 +321,46 @@ def _aggregate_until_fits(
 
 
 def _plot_stacked_bars(ax, x, top_vals, bottom_vals, annotate: bool):
-    """Draw stacked bars for available vs non-available slots."""
-    bars1 = ax.bar(x, bottom_vals, label="Unavailable Slots", color=COLORS["unavailable"], zorder=3)
-    bars2 = ax.bar(x, top_vals, bottom=bottom_vals, label="Available Slots", color=COLORS["available"], zorder=3)
+    """Draw stacked bars for available vs non-available slots, hiding 0% labels."""
+    bars1 = ax.bar(
+        x, bottom_vals,
+        label="Non-Available Slots",
+        color=COLORS["unavailable"], zorder=3
+    )
+    bars2 = ax.bar(
+        x, top_vals,
+        bottom=bottom_vals,
+        label="Available Slots",
+        color=COLORS["available"], zorder=3
+    )
 
     if annotate:
-        totals = (top_vals + bottom_vals)
+        totals = top_vals + bottom_vals
         for i in range(len(x)):
             if totals[i] <= 0:
                 continue
+
             na_pct = bottom_vals[i] / totals[i] * 100
             a_pct = top_vals[i] / totals[i] * 100
-            ax.text(x[i], bottom_vals[i] / 2, f"{na_pct:.0f}%",
-                    ha="center", va="center", color="white", fontsize=9, fontweight="bold")
-            ax.text(x[i], bottom_vals[i] + (top_vals[i] / 2), f"{a_pct:.0f}%",
-                    ha="center", va="center", color="white", fontsize=9, fontweight="bold")
+
+            # Label only if percentage > 0%
+            if na_pct > 0:
+                ax.text(
+                    x[i],
+                    bottom_vals[i] / 2,
+                    f"{na_pct:.0f}%",
+                    ha="center", va="center",
+                    color="white", fontsize=9, fontweight="bold"
+                )
+            if a_pct > 0:
+                ax.text(
+                    x[i],
+                    bottom_vals[i] + (top_vals[i] / 2),
+                    f"{a_pct:.0f}%",
+                    ha="center", va="center",
+                    color="white", fontsize=9, fontweight="bold"
+                )
+
     return bars1, bars2
 
 
