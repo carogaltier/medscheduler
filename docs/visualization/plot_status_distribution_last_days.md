@@ -53,8 +53,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Explore the complementary forward-looking version: {doc}`../api-reference/plot_status_distribution_next_days`
-- Review appointment outcome definitions and rates: {doc}`../api-reference/attendance_behavior`
-- Learn about how reference dates partition the dataset: {doc}`../api-reference/date_ranges_ref_date`
-- See how rebooking and cancellation parameters influence patterns: {doc}`../api-reference/booking_dynamics`
+- Explore the forward-looking version: {doc}`../visualization/plot_status_distribution_next_days`
+- Review appointment outcome definitions and probabilities: {doc}`../api-reference/attendance_behavior`
+- Learn how `ref_date` partitions the dataset: {doc}`../api-reference/date_ranges_ref_date`
+- Analyze short-term appointment outcomes: {doc}`../visualization/plot_appointments_by_status`
+
 
