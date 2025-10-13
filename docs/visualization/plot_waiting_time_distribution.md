@@ -48,7 +48,7 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare waiting and duration trends: {doc}`../api-reference/plot_appointment_duration_distribution`  
-- Learn how waiting times are simulated: {doc}`../api-reference/appointment_timing`  
-- Explore patient flow and punctuality parameters: {doc}`../api-reference/patient_flow`  
-- Adjust scheduling behavior and randomness: {doc}`../api-reference/randomness_and_noise`
+- Compare waiting and duration trends: {doc}`../visualization/plot_appointment_duration_distribution`
+- Learn how waiting times are simulated: {doc}`../api-reference/appointment_timing`
+- Explore punctuality and patient flow: {doc}`../api-reference/patient_flow`
+- Adjust randomness and timing variability: {doc}`../api-reference/randomness_and_noise`
