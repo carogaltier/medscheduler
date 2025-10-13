@@ -54,8 +54,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare with future appointment forecast: {doc}`../api-reference/plot_appointments_by_status_future`  
-- Explore definitions and probabilities of each outcome: {doc}`../api-reference/attendance_behavior`  
-- Review how reference dates determine historical filtering: {doc}`../api-reference/date_ranges_ref_date`  
-- Adjust cancellation and attendance rates via customization: {doc}`../user-guide/customization_options`
+- Compare with future appointment forecast: {doc}`../visualization/plot_appointments_by_status_future`
+- Explore definitions and probabilities of each outcome: {doc}`../api-reference/attendance_behavior`
+- Review how reference dates affect filtering: {doc}`../api-reference/date_ranges_ref_date`
+- Adjust attendance and cancellation rates: {doc}`../user-guide/customization_options`
+
 
