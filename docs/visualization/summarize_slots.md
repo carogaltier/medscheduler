@@ -56,8 +56,8 @@ pd.Series(summary, name="Slots Summary")
 ---
 
 ## Next Steps
-- Learn about slot capacity and structure: {doc}`../api-reference/slots_table`
-- See how the reference date defines past/future segmentation: {doc}`../api-reference/date_ranges_ref_date`
-- Review working-day and time-block configuration: {doc}`../api-reference/calendar_structure`
-- Explore how fill rate and booking horizon affect utilization: {doc}`../api-reference/booking_dynamics`
+- Review slot generation and structure: {doc}`../api-reference/slots_table`
+- Learn how reference dates define past/future segmentation: {doc}`../api-reference/date_ranges_ref_date`
+- Explore utilization and fill rate dynamics: {doc}`../api-reference/booking_dynamics`
+- Visualize past and future availability: {doc}`../visualization/plot_past_slot_availability`, {doc}`../visualization/plot_future_slot_availability`
 
