@@ -50,8 +50,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Explore appointment timing and waiting-time parameters: {doc}`../api-reference/appointment_timing`  
-- Learn how booking horizon and lead time affect scheduling intervals: {doc}`../api-reference/booking_dynamics`  
-- Review randomness and variability controls in simulations: {doc}`../api-reference/randomness_and_noise`  
-- Adjust behavior using patient and rebooking parameters: {doc}`../user-guide/customization_options`
+- Explore booking horizon and lead time effects: {doc}`../api-reference/booking_dynamics`
+- Learn how appointment timing and waiting time interact: {doc}`../api-reference/appointment_timing`
+- Compare with arrival punctuality: {doc}`../visualization/plot_arrival_time_distribution`
+- Adjust patient behavior parameters: {doc}`../user-guide/customization_options`
+
 
