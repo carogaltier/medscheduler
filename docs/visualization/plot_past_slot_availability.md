@@ -57,8 +57,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Review slot generation and capacity logic: {doc}`../api-reference/slots_table`
-- Learn how `ref_date` defines historical vs. upcoming periods: {doc}`../api-reference/date_ranges_ref_date`
-- Explore booking rates and utilization control: {doc}`../api-reference/booking_dynamics`
-- Understand calendar parameters that define working days and hours: {doc}`../api-reference/calendar_structure`
+- Review slot configuration and calendar structure: {doc}`../api-reference/calendar_structure`
+- Learn how `ref_date` defines historical segmentation: {doc}`../api-reference/date_ranges_ref_date`
+- Compare with upcoming availability: {doc}`../visualization/plot_future_slot_availability`
+- Explore fill rate and booking horizon settings: {doc}`../api-reference/booking_dynamics`
+
 
