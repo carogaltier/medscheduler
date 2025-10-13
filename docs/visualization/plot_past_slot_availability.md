@@ -50,7 +50,7 @@ sched = AppointmentScheduler()
 slots_df, appts_df, patients_df = sched.generate()
 
 # Visualize historical slot utilization before the reference date
-ax = plot_past_slot_availability(slots_df, scheduler=sched)
+ax = plot_past_slot_availability(slots_df, scheduler=sched, freq="M") # Monthly aggregation
 ax.figure.show()  # optional when running interactively
 ```
 
