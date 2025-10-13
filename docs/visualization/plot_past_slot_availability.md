@@ -54,6 +54,11 @@ ax = plot_past_slot_availability(slots_df, scheduler=sched, freq="M") # Monthly 
 ax.figure.show()  # optional when running interactively
 ```
 
+**Output preview:**  
+The chart below illustrates slot utilization prior to the reference date, aggregated monthly. It shows the proportion of available versus unavailable slots over time, reflecting past scheduling performance.
+
+![Past Slot Availability](../_static/visuals/plot_past_slot_availability.png)
+
 ---
 
 ## Next Steps
