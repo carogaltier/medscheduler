@@ -47,7 +47,7 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare weekday vs. monthly patterns: {doc}`../api-reference/plot_monthly_appointment_distribution`
+- Compare weekday vs. monthly distributions: {doc}`../visualization/plot_monthly_appointment_distribution`
 - Understand slot allocation by working days: {doc}`../api-reference/calendar_structure`
-- Review configuration of working day parameters: {doc}`../api-reference/slots_table`
-- Explore appointment flow dynamics: {doc}`../api-reference/patient_flow`
+- Explore appointment flow and operational patterns: {doc}`../api-reference/patient_flow`
+- Review slot-level configuration: {doc}`../api-reference/slots_table`
