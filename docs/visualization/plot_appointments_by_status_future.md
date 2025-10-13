@@ -52,8 +52,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare with historical appointment outcomes: {doc}`../api-reference/plot_appointments_by_status`  
-- Review status categories and probabilities: {doc}`../api-reference/attendance_behavior`  
-- Understand how reference dates affect dataset partitioning: {doc}`../api-reference/date_ranges_ref_date`  
-- Explore booking horizon and future slot utilization: {doc}`../api-reference/booking_dynamics`
+- Compare with historical appointment outcomes: {doc}`../visualization/plot_appointments_by_status`
+- Review status categories and cancellation rates: {doc}`../api-reference/attendance_behavior`
+- Understand reference date logic for upcoming data: {doc}`../api-reference/date_ranges_ref_date`
+- Explore booking horizon and utilization parameters: {doc}`../api-reference/booking_dynamics`
+
 
