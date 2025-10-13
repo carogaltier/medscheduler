@@ -51,8 +51,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare arrival patterns with waiting times: {doc}`../api-reference/plot_waiting_time_distribution`  
-- Review punctuality and attendance behavior: {doc}`../api-reference/attendance_behavior`  
-- Explore how scheduling and service parameters affect patient flow: {doc}`../api-reference/patient_flow`  
-- Adjust time variability or simulation noise: {doc}`../api-reference/randomness_and_noise`
+- Compare arrival behavior with waiting times: {doc}`../visualization/plot_waiting_time_distribution`
+- Review punctuality and attendance patterns: {doc}`../api-reference/attendance_behavior`
+- Analyze how scheduling affects flow dynamics: {doc}`../api-reference/patient_flow`
+- Explore timing variability and noise parameters: {doc}`../api-reference/randomness_and_noise`
+
 
