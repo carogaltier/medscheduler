@@ -45,6 +45,11 @@ ax = plot_appointment_duration_distribution(appts_df)
 ax.figure.show()  # optional when running interactively
 ```
 
+**Output preview:**  
+The following chart illustrates the distribution of appointment durations, showing how frequently each time interval occurs within the simulated dataset.  
+
+![Appointment Duration Distribution](../_static/visuals/plot_appointment_duration_distribution.png)
+
 ---
 
 ## Next Steps
