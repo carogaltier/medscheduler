@@ -238,7 +238,6 @@ def _empty_plot(message: str = "Nothing to show") -> plt.Axes:
     ax.set_title(message)
     ax.text(0.5, 0.5, message, ha="center", va="center", fontsize=12)
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -471,7 +470,6 @@ def plot_past_slot_availability(
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     ax.spines[["right", "top"]].set_visible(False)
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -565,7 +563,6 @@ def plot_future_slot_availability(
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     ax.spines[["right", "top"]].set_visible(False)
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -626,7 +623,6 @@ def plot_monthly_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -738,7 +734,6 @@ def plot_status_distribution_last_days(
     ax.set_xlim(xmin + 0.75, xmax - 0.75)
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 # ---------------------------------------------------------------
@@ -851,7 +846,6 @@ def plot_status_distribution_next_days(
     ax.set_xlim(xmin + 0.5, xmax - 0.5)
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -914,7 +908,6 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
             ha="center", fontsize=9, fontweight="bold", color=COLORS["text"]
         )
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 # ---------------------------------------------------------------
@@ -1069,7 +1062,6 @@ def plot_population_pyramid(
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -1162,7 +1154,6 @@ def plot_appointments_by_status(
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -1259,7 +1250,6 @@ def plot_appointments_by_status_future(
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -1352,7 +1342,6 @@ def plot_scheduling_interval_distribution(
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -1445,7 +1434,6 @@ def plot_appointment_duration_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
@@ -1539,7 +1527,7 @@ def plot_waiting_time_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
-    plt.close(fig)
+
     return ax
 
 # ---------------------------------------------------------------
@@ -1669,7 +1657,6 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
         )
 
     fig.tight_layout()
-    plt.close(fig)
     return ax
 
 
