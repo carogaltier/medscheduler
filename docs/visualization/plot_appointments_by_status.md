@@ -50,6 +50,10 @@ slots_df, appts_df, patients_df = sched.generate()
 ax = plot_appointments_by_status(appts_df, scheduler=sched)
 ax.figure.show()  # optional when running interactively
 ```
+**Output preview:**  
+The chart below displays the percentage distribution of appointment outcomes prior to the reference date, highlighting proportions of attended, cancelled, and missed appointments.  
+
+![Appointments by Status](../_static/visuals/plot_appointments_by_status.png)
 
 ---
 
