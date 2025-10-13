@@ -48,8 +48,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Compare with waiting time distribution: {doc}`../api-reference/plot_waiting_time_distribution`  
-- Learn how appointment timing and duration are generated: {doc}`../api-reference/appointment_timing`  
-- Review appointment structure and duration parameters: {doc}`../api-reference/appointments_table`  
-- Explore customization options for simulation realism: {doc}`../user-guide/customization_options`
+- Compare with waiting time patterns: {doc}`../visualization/plot_waiting_time_distribution`
+- Learn how appointment duration is generated: {doc}`../api-reference/appointment_timing`
+- Review duration parameters in the appointments table: {doc}`../api-reference/appointments_table`
+- Adjust simulation realism through customization: {doc}`../user-guide/customization_options`
+
 
