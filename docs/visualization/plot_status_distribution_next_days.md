@@ -55,7 +55,7 @@ ax.figure.show()  # optional in interactive sessions
 ---
 
 ## Next Steps
-- Compare with the backward-looking version: {doc}`../api-reference/plot_status_distribution_last_days`
-- Review appointment outcome categories and color definitions: {doc}`../api-reference/attendance_behavior`
+- Compare with the backward-looking version: {doc}`../visualization/plot_status_distribution_last_days`
+- Review future appointment outcome categories: {doc}`../api-reference/attendance_behavior`
 - Learn how reference dates and booking horizons interact: {doc}`../api-reference/date_ranges_ref_date`
-- Explore scheduling parameters that affect future appointment patterns: {doc}`../api-reference/booking_dynamics`
+- Explore future scheduling patterns: {doc}`../api-reference/booking_dynamics`
