@@ -59,8 +59,9 @@ ax.figure.show()  # optional when running interactively
 ---
 
 ## Next Steps
-- Learn how slot capacity and working hours define total availability: {doc}`../api-reference/slots_table`
-- Understand booking horizon and its influence on future slot visibility: {doc}`../api-reference/booking_dynamics`
-- Review date handling and reference periods: {doc}`../api-reference/date_ranges_ref_date`
-- Explore how weekday and month weights affect future slot distribution: {doc}`../api-reference/seasonality_weights`
+- Compare with past availability trends: {doc}`../visualization/plot_past_slot_availability`
+- Understand booking horizon and forward visibility: {doc}`../api-reference/booking_dynamics`
+- Review weekday and seasonal weights: {doc}`../api-reference/seasonality_weights`
+- Learn about working hours and total slot capacity: {doc}`../api-reference/slots_table`
+
 
