@@ -52,7 +52,7 @@ sched = AppointmentScheduler()
 slots_df, appts_df, patients_df = sched.generate()
 
 # Visualize projected capacity beyond the reference date
-ax = plot_future_slot_availability(slots_df, scheduler=sched)
+ax = plot_future_slot_availability(slots_df, scheduler=sched, freq="D") # Daily aggregation
 ax.figure.show()  # optional when running interactively
 ```
 
