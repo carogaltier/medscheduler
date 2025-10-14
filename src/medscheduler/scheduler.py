@@ -940,9 +940,8 @@ class AppointmentScheduler:
             if past.empty:
                 return pd.DataFrame(columns=cols)
         try:
-            from .constants import DEFAULT_MONTH_WEIGHTS, DEFAULT_WEEKDAY_WEIGHTS
-            month_w = past["appointment_date"].dt.month.map(DEFAULT_MONTH_WEIGHTS).astype(float)
-            wday_w  = past["appointment_date"].dt.weekday.map(DEFAULT_WEEKDAY_WEIGHTS).astype(float)
+            month_w = past["appointment_date"].dt.month.map(self._month_w_norm).astype(float)
+            wday_w  = past["appointment_date"].dt.weekday.map(self._weekday_w_norm).astype(float)
             weights = (month_w * wday_w).replace([np.inf, -np.inf], np.nan).fillna(0.0)
             if (weights <= 0).all():
                 weights = None
