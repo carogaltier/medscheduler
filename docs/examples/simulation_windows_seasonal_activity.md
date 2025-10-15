@@ -34,8 +34,8 @@ sched_split = AppointmentScheduler(
 slots_df, appts_df, patients_df = sched_split.generate()
 
 # Visualize utilization before and after the reference date
-plot_past_slot_availability(slots_df, scheduler=sched_split, freq="M")
-plot_future_slot_availability(slots_df, scheduler=sched_split, freq="M")
+plot_past_slot_availability(slots_df, scheduler=sched_split)
+plot_future_slot_availability(slots_df, scheduler=sched_split)
 ```
 
 
@@ -66,8 +66,8 @@ sched_academic = AppointmentScheduler(
 slots_df, appts_df, patients_df = sched_academic.generate()
 
 # Monthly aggregation for easier interpretation
-plot_past_slot_availability(slots_df, scheduler=sched_academic, freq="M")
-plot_future_slot_availability(slots_df, scheduler=sched_academic, freq="M")
+plot_past_slot_availability(slots_df, scheduler=sched_academic)
+plot_future_slot_availability(slots_df, scheduler=sched_academic, freq="D")
 ```
 
 **Output preview:**  
