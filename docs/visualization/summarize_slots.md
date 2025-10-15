@@ -55,7 +55,7 @@ pd.Series(summary, name="Slots Summary")
 **Output preview:**  
 The example below shows the resulting summary table with key metrics describing slot capacity, availability, and utilization across the generated scheduling period.  
 
-![Slots Summary visualization](../_static/visuals/slots_summary.png)
+![Slots Summary visualization](../_static/visuals/visualization/slots_summary.png)
 ---
 
 ## Next Steps
