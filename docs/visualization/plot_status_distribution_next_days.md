@@ -54,7 +54,7 @@ ax.figure.show()  # optional in interactive sessions
 **Output preview:**  
 The stacked bar chart below displays the distribution of appointment statuses for the 30 days following the reference date. It highlights how future appointments are categorized (e.g., scheduled vs. cancelled) across each upcoming day.
 
-![Status Distribution Next Days](../_static/visuals/plot_status_distribution_next_days.png)
+![Status Distribution Next Days](../_static/visuals/visualization/plot_status_distribution_next_days.png)
 ---
 
 ## Next Steps
