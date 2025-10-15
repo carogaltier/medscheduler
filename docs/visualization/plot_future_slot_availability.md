@@ -59,7 +59,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The following chart shows the projected slot availability after the reference date, aggregated daily. It highlights available versus unavailable slots, providing an overview of near‑term scheduling capacity.
 
-![Future Slot Availability](../_static/visuals/plot_future_slot_availability.png)
+![Future Slot Availability](../_static/visuals/visualization/plot_future_slot_availability.png)
 
 ---
 
