@@ -49,7 +49,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The histogram below visualizes the distribution of scheduling intervals, showing how many days in advance patients typically book their appointments. Bars represent the number of bookings per interval, annotated with percentage labels for clarity.
 
-![Scheduling Interval Distribution](../_static/visuals/plot_scheduling_interval_distribution.png)
+![Scheduling Interval Distribution](../_static/visuals/visualization/plot_scheduling_interval_distribution.png)
 
 ---
 
