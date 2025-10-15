@@ -415,7 +415,7 @@ def plot_past_slot_availability(
     ref_date: Optional[Union[str, pd.Timestamp, datetime]] = None,
     date_col: str = "appointment_date",
     available_col: str = "is_available",
-    freq: str = "Y",
+    freq: str = "M",
     min_bar_px: int = 55,
     label_px_threshold: int = 55,
     min_fig_w_in: float = 7.0,
