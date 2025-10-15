@@ -47,7 +47,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The histogram below shows the distribution of patient waiting times in minutes. Each bar represents the number of appointments falling within a specific waiting-time range, with percentage labels above the bars.
 
-![Waiting Time Distribution](../_static/visuals/plot_waiting_time_distribution.png)
+![Waiting Time Distribution](../_static/visuals/visualization/plot_waiting_time_distribution.png)
 
 ---
 
