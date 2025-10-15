@@ -52,7 +52,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The stacked bar chart below shows the distribution of appointment outcomes (attended, cancelled, did not attend, etc.) over the last 30 days before the reference date. Each bar represents a single day, with colors indicating status categories.
 
-![Status Distribution Last Days](../_static/visuals/plot_status_distribution_last_days.png)
+![Status Distribution Last Days](../_static/visuals/visualization/plot_status_distribution_last_days.png)
 ---
 
 ## Next Steps
