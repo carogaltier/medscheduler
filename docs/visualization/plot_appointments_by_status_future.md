@@ -52,7 +52,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The chart below presents the percentage distribution of future appointments by status, showing scheduled versus cancelled proportions relative to the reference date.  
 
-![Future Appointments by Status](../_static/visuals/plot_appointments_by_status_future.png)
+![Future Appointments by Status](../_static/visuals/visualization/plot_appointments_by_status_future.png)
 ---
 
 ## Next Steps
