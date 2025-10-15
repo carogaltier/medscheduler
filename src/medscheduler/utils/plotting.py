@@ -637,32 +637,6 @@ def plot_status_distribution_last_days(
     date_col: str = "appointment_date",
     status_col: str = "status"
 ) -> plt.Axes:
-    """
-    Plot the daily distribution of appointment statuses for the last N days.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        DataFrame containing at least `date_col` and `status_col`.
-    scheduler : object
-        Scheduler instance providing a `ref_date` attribute.
-    days_back : int, default=30
-        Number of days before `ref_date` to include in the plot.
-    date_col : str, default="appointment_date"
-        Column name containing appointment dates.
-    status_col : str, default="status"
-        Column name containing appointment statuses.
-
-    Returns
-    -------
-    plt.Axes
-        Matplotlib Axes object for the generated plot.
-
-    Raises
-    ------
-    ValueError
-        If required columns are missing or scheduler does not have `ref_date`.
-    """
     # --- Column validation
     required_cols = {date_col, status_col}
     missing_cols = required_cols - set(df.columns)
@@ -678,15 +652,26 @@ def plot_status_distribution_last_days(
 
     # --- Filter last N days before ref_date
     ref_date = pd.to_datetime(scheduler.ref_date).normalize()
-    start_date = ref_date - pd.Timedelta(days=days_back)
+    start_date = (ref_date - pd.Timedelta(days=days_back)).normalize()
+    end_date = (ref_date - pd.Timedelta(days=1)).normalize()
+
+    # full continuous date index (novedad)
+    full_dates = pd.date_range(start=start_date, end=end_date, freq="D")
+
     mask = (df[date_col] < ref_date) & (df[date_col] >= start_date)
     filtered_df = df.loc[mask]
 
     if filtered_df.empty:
         return _empty_plot(f"No data available in the last {days_back} days before {ref_date.date()}.")
 
-    # --- Group by date and status
-    grouped = filtered_df.groupby([date_col, status_col], observed=True).size().unstack(fill_value=0)
+    # --- Group by date and status, luego reindex a full_dates (novedad)
+    grouped = (
+        filtered_df
+        .groupby([df[date_col].dt.normalize(), status_col], observed=True)
+        .size()
+        .unstack(fill_value=0)
+        .reindex(index=full_dates, fill_value=0)  # << incluye días sin turnos
+    )
 
     statuses = grouped.columns
     colors = [COLORS[s] for s in statuses]
@@ -723,11 +708,11 @@ def plot_status_distribution_last_days(
     ax.set_ylabel("Number of Appointments", labelpad=10, fontsize=10.5)
     ax.legend(loc="upper right", bbox_to_anchor=(1.01, 1.3), frameon=False)
 
-    # --- X-axis formatting
+    # --- X-axis formatting (sin cambios)
     ax.set_xticks(dates)
     ax.set_xticklabels(dates.strftime("%Y-%m-%d"), rotation=45, ha="right")
 
-    # --- Style adjustments
+    # --- Style adjustments (sin cambios)
     ax.spines[["right", "top"]].set_visible(False)
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     xmin, xmax = ax.get_xlim()
@@ -735,6 +720,7 @@ def plot_status_distribution_last_days(
 
     fig.tight_layout()
     return ax
+
 
 # ---------------------------------------------------------------
 # Plot: Daily Appointment Status Distribution (Next 30 Days)
