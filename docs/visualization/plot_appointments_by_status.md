@@ -53,7 +53,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The chart below displays the percentage distribution of appointment outcomes prior to the reference date, highlighting proportions of attended, cancelled, and missed appointments.  
 
-![Appointments by Status](../_static/visuals/plot_appointments_by_status.png)
+![Appointments by Status](../_static/visuals/visualization/plot_appointments_by_status.png)
 
 ---
 
