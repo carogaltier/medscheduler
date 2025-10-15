@@ -50,7 +50,7 @@ ax.figure.show()  # optional when running interactively
 **Output preview:**  
 The chart below visualizes patient arrival patterns relative to scheduled appointment times, distinguishing early arrivals (blue) from late arrivals (orange) among attended patients.  
 
-![Arrival Time Distribution](../_static/visuals/plot_arrival_time_distribution.png)
+![Arrival Time Distribution](../_static/visuals/visualization/plot_arrival_time_distribution.png)
 
 ---
 
