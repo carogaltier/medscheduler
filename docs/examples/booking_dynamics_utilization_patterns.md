@@ -50,14 +50,18 @@ pd.Series(metrics, name="Slot Utilization Metrics")
 ```
 
 **Output preview:**  
-- ![Past availability – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_past_slot_availability.png)  
-  *Shows stable utilization across months, with most past slots booked.*
-- ![Future availability – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_future_slot_availability.png)  
-  *Displays near-term bookings tapering off beyond the 30-day window.*
-- ![Lead time distribution – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_scheduling_interval_distribution.png)  
-  *Indicates that most patients book about 10 days in advance.*
-- ![Summary – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_summarize_slots.png)  
-  *Summarizes 80% utilization with consistent slot density across working days.*
+- Shows stable utilization across months, with most past slots booked.
+  ![Past availability – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_past_slot_availability.png)  
+  
+- Displays near-term bookings tapering off beyond the 30-day window.
+  ![Future availability – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_future_slot_availability.png)  
+  
+- Indicates that most patients book about 10 days in advance.
+  ![Lead time distribution – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_plot_scheduling_interval_distribution.png)  
+
+- Summarizes 80% utilization with consistent slot density across working days.
+  ![Summary – Balanced clinic](../_static/visuals/examples/booking_dynamics/sched_balanced_summarize_slots.png)  
+
 
 **Interpretation:**  
 The clinic exhibits steady demand and balanced utilization: roughly 80% of slots filled, with near-term slots booked first and gradually decaying toward the end of the 30-day window.  Lead times cluster around 10 days, representing a healthy and accessible booking rhythm.
@@ -95,14 +99,18 @@ pd.Series(metrics, name="Slot Utilization Metrics")
 ```
 
 **Output preview:**  
-- ![Past availability – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_past_slot_availability.png)  
-  *Demonstrates high occupancy, with very few open slots historically.*
-- ![Future availability – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_future_slot_availability.png)  
-  *Shows the short booking window fully utilized in the near term.*
-- ![Lead time distribution – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_scheduling_interval_distribution.png)  
-  *Highlights that most bookings occur within the week before appointments.*
-- ![Summary – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_summarize_slots.png)  
-  *Reflects 95% fill rate with dense, short-horizon scheduling.*
+- Demonstrates high occupancy, with very few open slots historically.
+  ![Past availability – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_past_slot_availability.png)  
+
+- Shows the short booking window fully utilized in the near term.
+  ![Future availability – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_future_slot_availability.png)  
+
+- Highlights that most bookings occur within the week before appointments.
+  ![Lead time distribution – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_plot_scheduling_interval_distribution.png)  
+
+- Reflects 95% fill rate with dense, short-horizon scheduling.
+  ![Summary – High-demand service](../_static/visuals/examples/booking_dynamics/sched_highdemand_summarize_slots.png)  
+
 
 **Interpretation:**  
 The near-saturated calendar produces minimal idle capacity, with both historical and upcoming slots showing over 90% occupancy. Most bookings occur within the week prior to the appointment, generating a dense, short-horizon schedule typical of busy outpatient departments.
@@ -139,14 +147,18 @@ pd.Series(metrics, name="Slot Utilization Metrics")
 ```
 
 **Output preview:**  
-- ![Past availability – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_past_slot_availability.png)  
-  *Displays moderate historical utilization with stable weekly capacity.*
-- ![Future availability – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_future_slot_availability.png)  
-  *Illustrates many open future slots extending beyond one month.*
-- ![Lead time distribution – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_scheduling_interval_distribution.png)  
-  *Shows bookings concentrated around 20 days before the appointment.*
-- ![Summary – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_summarize_slots.png)  
-  *Summarizes 60% utilization and extended horizon scheduling.*
+- Displays moderate historical utilization with stable weekly capacity.
+  ![Past availability – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_past_slot_availability.png)  
+
+- Illustrates many open future slots extending beyond one month.
+  ![Future availability – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_future_slot_availability.png)  
+
+- Shows bookings concentrated around 20 days before the appointment.
+  ![Lead time distribution – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_plot_scheduling_interval_distribution.png)  
+
+- Summarizes 60% utilization and extended horizon scheduling.
+  ![Summary – Preventive care center](../_static/visuals/examples/booking_dynamics/sched_preventive_summarize_slots.png)  
+
 
 **Interpretation:**  
 This configuration produces a flatter utilization pattern, where upcoming slots extend far into the future but are only partially filled. The wide booking horizon ensures accessibility, while the lower fill rate keeps daily load manageable — characteristic of preventive or low-urgency services.
