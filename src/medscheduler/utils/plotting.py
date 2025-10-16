@@ -1276,13 +1276,13 @@ def plot_scheduling_interval_distribution(
     if df[interval_col].dropna().empty:
         raise ValueError(f"No data available in column '{interval_col}'.")
 
-    scheduling_intervals = df[interval_col].dropna()
-
     # --- Create bins and histogram
-    bins = range(int(scheduling_intervals.min()), int(scheduling_intervals.max()) + 2)
+    scheduling_intervals = df[interval_col].dropna()
+    max_interval = int(scheduling_intervals.max())
+    bins = range(int(scheduling_intervals.min()), max_interval + 2)
     counts, edges = np.histogram(scheduling_intervals, bins=bins)
     percentages = (counts / scheduling_intervals.size) * 100
-
+    
     # --- Filter bins by percentage threshold
     valid_bins = [
         (x, count, pct)
@@ -1296,12 +1296,22 @@ def plot_scheduling_interval_distribution(
     valid_counts = [count for _, count, _ in valid_bins]
     valid_percentages = [pct for _, _, pct in valid_bins]
 
+    if max_interval <= 7:
+        fig_width = 5
+    elif max_interval <= 14:
+        fig_width = 10
+    else:
+        fig_width = 16
+
+    n_bins = len(bins) - 1
+    
     # --- Create plot
-    fig, ax = plt.subplots(figsize=(16, 5))
+    fig, ax = plt.subplots(figsize=(fig_width, 5))
     fig.suptitle(
         "How Far in Advance Do Patients Schedule?",
         fontsize=12, x=0.12, y=1.04, ha="center"
     )
+
     ax.bar(
         valid_x, valid_counts, width=0.9, align="center",
         edgecolor="#ffffff", color=COLORS["primary"], zorder=3
@@ -1317,7 +1327,9 @@ def plot_scheduling_interval_distribution(
     ax.spines[["right", "top"]].set_visible(False)
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     xmin, xmax = ax.get_xlim()
-    ax.set_xlim(xmin + 1, xmax - 1)
+    xrange = xmax - xmin
+    padding = 0.02 * xrange if max_interval <= 14 else 0.05 * xrange
+    ax.set_xlim(xmin - padding, xmax + padding)
 
     # --- Add percentage labels
     for x, count, pct in zip(valid_x, valid_counts, valid_percentages):
