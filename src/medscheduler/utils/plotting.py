@@ -1250,40 +1250,20 @@ def plot_scheduling_interval_distribution(
 ) -> plt.Axes:
     """
     Plot the distribution of scheduling intervals in days.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        DataFrame containing at least the `interval_col` column.
-    interval_col : str, default="scheduling_interval"
-        Column name containing scheduling intervals in days.
-    min_pct_threshold : float, default=0.1
-        Minimum percentage threshold to include a bar in the plot.
-
-    Returns
-    -------
-    plt.Axes
-        Matplotlib Axes object for the generated plot.
-
-    Raises
-    ------
-    ValueError
-        If `interval_col` is missing or empty.
     """
-    # --- Column validation
+    
     if interval_col not in df.columns:
         raise ValueError(f"DataFrame must contain column '{interval_col}'.")
     if df[interval_col].dropna().empty:
         raise ValueError(f"No data available in column '{interval_col}'.")
 
-    # --- Create bins and histogram
     scheduling_intervals = df[interval_col].dropna()
     max_interval = int(scheduling_intervals.max())
+
     bins = range(int(scheduling_intervals.min()), max_interval + 2)
     counts, edges = np.histogram(scheduling_intervals, bins=bins)
     percentages = (counts / scheduling_intervals.size) * 100
-    
-    # --- Filter bins by percentage threshold
+
     valid_bins = [
         (x, count, pct)
         for x, count, pct in zip(edges[:-1], counts, percentages)
@@ -1297,15 +1277,14 @@ def plot_scheduling_interval_distribution(
     valid_percentages = [pct for _, _, pct in valid_bins]
 
     if max_interval <= 7:
-        fig_width = 5
+        fig_width = 4.5
     elif max_interval <= 14:
-        fig_width = 10
+        fig_width = 8
     else:
         fig_width = 16
 
     n_bins = len(bins) - 1
-    
-    # --- Create plot
+
     fig, ax = plt.subplots(figsize=(fig_width, 5))
     fig.suptitle(
         "How Far in Advance Do Patients Schedule?",
@@ -1327,9 +1306,7 @@ def plot_scheduling_interval_distribution(
     ax.spines[["right", "top"]].set_visible(False)
     ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
     xmin, xmax = ax.get_xlim()
-    xrange = xmax - xmin
-    padding = 0.02 * xrange if max_interval <= 14 else 0.05 * xrange
-    ax.set_xlim(xmin - padding, xmax + padding)
+    ax.set_xlim(xmin, xmax)
 
     # --- Add percentage labels
     for x, count, pct in zip(valid_x, valid_counts, valid_percentages):
