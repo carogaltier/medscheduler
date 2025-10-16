@@ -40,11 +40,14 @@ plot_future_slot_availability(slots_df, scheduler=sched_split)
 
 
 **Output preview:**  
-Below are the resulting charts for slot utilization before and after the reference date.
+Below are the main outputs for this configuration:
 
-![Past slot availability – Split periods](../_static/visuals/examples/simulation_windows/sched_split_plot_past_slot_availability.png)
+1. **Past slot utilization** – Slot capacity before the reference date (`2024-10-01`).  
+   ![Past slot availability – Split periods](../_static/visuals/examples/simulation_windows/sched_split_plot_past_slot_availability.png)
 
-![Future slot availability – Split periods](../_static/visuals/examples/simulation_windows/sched_split_plot_future_slot_availability.png)
+2. **Future slot utilization** – Remaining capacity after the reference date, reflecting the second operational period.  
+   ![Future slot availability – Split periods](../_static/visuals/examples/simulation_windows/sched_split_plot_future_slot_availability.png)
+
 
 **Interpretation:**  
 The resulting calendar shows two distinct booking periods separated by a service pause, allowing analysis of how seasonal breaks affect appointment availability.
@@ -71,11 +74,14 @@ plot_future_slot_availability(slots_df, scheduler=sched_academic, freq="D")
 ```
 
 **Output preview:**  
-The following figures illustrate appointment capacity before and after the reference date (`2025-03-01`).
+Below are the main outputs for this configuration:
 
-![Past slot availability – Academic hospital](../_static/visuals/examples/simulation_windows/sched_academic_plot_past_slot_availability.png)
+1. **Past slot utilization** – Historical appointment activity before the mid-year cut-off (`2025-03-01`).  
+   ![Past slot availability – Academic hospital](../_static/visuals/examples/simulation_windows/sched_academic_plot_past_slot_availability.png)
 
-![Future slot availability – Academic hospital](../_static/visuals/examples/simulation_windows/sched_academic_plot_future_slot_availability.png)
+2. **Future slot projection** – Upcoming capacity after the reference date, showing the continuation of the academic cycle.  
+   ![Future slot availability – Academic hospital](../_static/visuals/examples/simulation_windows/sched_academic_plot_future_slot_availability.png)
+
 
 
 **Interpretation:**  
@@ -110,10 +116,11 @@ slots_df, appts_df, patients_df = sched_seasonal.generate()
 plot_monthly_appointment_distribution(appts_df)
 ```
 
-*Output preview:**  
-The next chart shows the visible seasonal pattern in appointment volumes across months.
+**Output preview:**  
+Below are the main outputs for this configuration:
 
-![Monthly appointment distribution – Seasonal weights](../_static/visuals/examples/simulation_windows/sched_seasonal_plot_monthly_appointment_distribution.png)
+1. **Monthly appointment distribution** – The share of total appointments per month, adjusted by the defined `month_weights`.  
+   ![Monthly appointment distribution – Seasonal weights](../_static/visuals/examples/simulation_windows/sched_seasonal_plot_monthly_appointment_distribution.png)
 
 **Interpretation:**  
 The simulation produces visible peaks in winter months and fewer appointments during summer, closely resembling the demand curve of respiratory or flu clinics.  
