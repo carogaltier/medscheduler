@@ -154,7 +154,7 @@ This system maximizes capacity by instantly recycling cancellations into new boo
 
 ---
 
-### Next Steps
+## Next Steps
 - Examine how attendance influences patient flow in {doc}`../api-reference/patient_flow`.  
 - Explore {doc}`../api-reference/appointments_table` for how outcomes are stored.  
 - See {doc}`../api-reference/booking_dynamics` for how fill rate and scheduling affect these behaviors.
