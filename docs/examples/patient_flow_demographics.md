@@ -99,7 +99,6 @@ sched_chronic = AppointmentScheduler(
 
 slots_df, appts_df, patients_df = sched_chronic.generate()
 
-plot_population_pyramid(appts_df)
 plot_patients_visits(appts_df, years_back=1)
 plot_first_attendance_distribution(appts_df, scheduler=sched_chronic)
 ```
@@ -107,13 +106,10 @@ plot_first_attendance_distribution(appts_df, scheduler=sched_chronic)
 **Output preview:**  
 Below are the key results for this chronic-care configuration:
 
-1. **Population pyramid** – Similar demographic base but slightly older patient concentration.  
-   ![Population pyramid – Chronic care](../_static/visuals/examples/patient_flow/sched_chronic_plot_population_pyramid.png)
-
-2. **Visits per patient (past year)** – Distribution shifted upward, with more frequent revisits per person.  
+1. **Visits per patient (past year)** – Distribution shifted upward, with more frequent revisits per person.  
    ![Visits per patient – Chronic care](../_static/visuals/examples/patient_flow/sched_chronic_plot_patients_visits.png)
 
-3. **First attendance distribution** – Majority of appointments from returning patients (~90%).  
+2. **First attendance distribution** – Majority of appointments from returning patients (~90%).  
    ![First attendance – Chronic care](../_static/visuals/examples/patient_flow/sched_chronic_plot_first_attendance_distribution.png)
 
 **Interpretation:**  
