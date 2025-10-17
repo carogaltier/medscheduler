@@ -137,7 +137,7 @@ As a result, months with more weekdays or with heavier weekday weighting (e.g. m
 
 ---
 
-## Next Steps
+### Next Steps
 - Explore parameter definitions in {doc}`../api-reference/date_ranges_ref_date`  
 - Learn how seasonality modifies utilization: {doc}`../api-reference/seasonality_weights`  
 - Understand how booking and fill rate interact with time ranges: {doc}`../api-reference/booking_dynamics`  
