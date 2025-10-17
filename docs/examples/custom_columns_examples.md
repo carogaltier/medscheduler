@@ -120,5 +120,7 @@ Such variables are useful when simulating unequal resource distribution or model
 ### Next Steps  
 - Review {doc}`../api-reference/patients_table` to see how these columns integrate into patient data.  
 - Explore {doc}`../api-reference/randomness_and_noise` for details on stochastic sampling.  
-- Combine with demographic or flow parameters to create richer simulation scenarios.
+- Combine with demographic or flow parameters to create richer simulation scenarios.  
+- Return to {doc}`patient_flow_demographics` to visualize how added attributes interact with baseline population structure.
+
 
