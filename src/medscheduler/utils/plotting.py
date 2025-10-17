@@ -1893,4 +1893,85 @@ def plot_arrival_time_distribution(df: pd.DataFrame) -> plt.Axes:
     fig.tight_layout()
     return ax
 
+# ---------------------------------------------------------------
+# Plot: Custom Column Distribution
+# ---------------------------------------------------------------
+def plot_custom_column_distribution(
+    df: pd.DataFrame,
+    column: str,
+    title_prefix: str = "Percentage of Patients by",
+    top_n: Optional[int] = None
+) -> plt.Axes:
+    """
+    Plot the percentage distribution of a custom categorical column (e.g. insurance type, region, provider group).
 
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame containing the custom categorical column.
+    column : str
+        Name of the column to visualize (must exist in df).
+    title_prefix : str, default="Percentage of Patients by"
+        Prefix for the plot title. The column name will be appended in title case.
+    top_n : int, optional
+        Limit to show only the top N categories by frequency (useful for long tails).
+
+    Returns
+    -------
+    plt.Axes
+        Matplotlib Axes object for the generated plot.
+    """
+
+    # --- Validation
+    if column not in df.columns:
+        return _empty_plot(f"Column '{column}' not found in DataFrame.")
+
+    if df[column].dropna().empty:
+        return _empty_plot(f"No valid data found in column '{column}'.")
+
+    # --- Prepare data
+    value_counts = (
+        df[column]
+        .value_counts(normalize=True)
+        .mul(100)
+        .sort_values(ascending=True)
+    )
+
+    if top_n is not None and len(value_counts) > top_n:
+        value_counts = value_counts.tail(top_n)
+
+    categories = value_counts.index
+    percentages = value_counts.values
+
+    # --- Create plot
+    fig, ax = plt.subplots(figsize=(9, 6))
+    bars = ax.barh(categories, percentages, color=COLORS["primary"], zorder=3)
+
+    # --- Title & labels
+    formatted_col_name = column.replace("_", " ").title()
+    ax.set_title(
+        f"{title_prefix} {formatted_col_name}",
+        loc="left", fontsize=12, weight="bold", pad=12
+    )
+    ax.set_xlabel("Percentage (%)", labelpad=10, fontsize=10.5)
+    ax.set_xlim(0, max(percentages) * 1.15 if percentages.size > 0 else 1)
+
+    # --- Add data labels
+    for bar, pct in zip(bars, percentages):
+        ax.text(
+            bar.get_width() + max(percentages) * 0.01,
+            bar.get_y() + bar.get_height() / 2,
+            f"{pct:.1f}%",
+            va="center",
+            ha="left",
+            fontsize=9,
+            fontweight="bold",
+            color=COLORS["text"]
+        )
+
+    # --- Style adjustments
+    ax.spines[["right", "top"]].set_visible(False)
+    ax.grid(axis="x", linestyle="--", alpha=0.7, zorder=-1)
+    ax.set_yticklabels(categories, fontsize=9)
+    fig.tight_layout()
+    return ax
