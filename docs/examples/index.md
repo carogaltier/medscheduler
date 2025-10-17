@@ -1,9 +1,19 @@
 # Examples
 
-This section will show applied scenarios demonstrating **medscheduler** usage.
+The **Examples** section provides interactive notebooks that demonstrate how to configure, generate, and analyze synthetic outpatient scheduling scenarios using Medscheduler.  
+Each notebook highlights a distinct aspect of the simulation — from time windows and seasonality to patient flow, attendance, and custom attributes — allowing users to explore realistic variations step by step.
 
-- Example 1: Generate slots and appointments
-- Example 2: Attendance and cancellations
-- Example 3: Overbooking simulation
+Use these examples as practical complements to the **User Guide** and **API Reference** to understand how parameter choices translate into observable scheduling behaviors.
 
-*Content coming soon…*
+```{toctree}
+:maxdepth: 2
+
+simulation_windows_seasonal_activity
+calendar_structure_daily_capacity
+booking_dynamics_utilization_patterns
+attendance_behavior_and_rebooking
+patient_flow_demographics
+appointment_timing_patterns
+custom_columns_examples
+```
+
