@@ -10,7 +10,6 @@ Use these visualizations to **evaluate realism**, **validate simulation paramete
 :maxdepth: 2
 
 summarize_slots
-plot_population_pyramid
 plot_past_slot_availability
 plot_future_slot_availability
 plot_monthly_appointment_distribution
@@ -20,7 +19,11 @@ plot_status_distribution_next_days
 plot_appointments_by_status
 plot_appointments_by_status_future
 plot_scheduling_interval_distribution
+plot_population_pyramid
+plot_patients_visits
+plot_first_attendance_distribution
 plot_appointment_duration_distribution
 plot_waiting_time_distribution
 plot_arrival_time_distribution
+plot_custom_column_distribution
 ```
