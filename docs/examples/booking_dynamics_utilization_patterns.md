@@ -177,14 +177,14 @@ This configuration produces a flatter utilization pattern, where upcoming slots 
 
 ---
 
-### Notes
+## Notes
 - Higher **fill rates** increase past and future utilization but may limit access.
 - Shorter **booking horizons** compress demand into near-term slots.
 - Longer **lead times** produce smoother, forward-distributed booking patterns.
 
 ---
 
-### Next Steps
+## Next Steps
 - Learn how booking behavior interacts with attendance in {doc}`../api-reference/attendance_behavior`  
 - Explore how slot timing affects punctuality in {doc}`../api-reference/appointment_timing`  
 - Revisit {doc}`../api-reference/seasonality_weights` to see how temporal weights further influence booking density.
