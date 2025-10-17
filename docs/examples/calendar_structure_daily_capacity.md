@@ -163,5 +163,7 @@ The summary table confirms higher weekday capacity and reduced weekend load, res
 - Learn how weekday and month weights interact in {doc}`../api-reference/seasonality_weights`  
 - Review probabilistic booking logic in {doc}`../api-reference/booking_dynamics`  
 - Explore how these structures connect to {doc}`../api-reference/date_ranges_ref_date`  
-- For temporal and demographic extensions, see {doc}`../api-reference/patient_flow`
+- For temporal and demographic extensions, see {doc}`../api-reference/patient_flow`  
+- Continue with {doc}`booking_dynamics_utilization_patterns` to observe utilization changes driven by booking behavior.
+
 
