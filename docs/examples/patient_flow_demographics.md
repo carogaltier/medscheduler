@@ -147,5 +147,7 @@ Because of this, the *first attendance* proportion is low and stable over time.
 ### Next Steps  
 - Review {doc}`../api-reference/patients_table` to explore patient-level attributes.  
 - Explore {doc}`../api-reference/appointment_timing` to analyze how visit timing interacts with demographics.  
-- See {doc}`../api-reference/attendance_behavior` for how attendance outcomes complement patient flow dynamics.
+- See {doc}`../api-reference/attendance_behavior` for how attendance outcomes complement patient flow dynamics.  
+- Continue with {doc}`custom_columns_examples` to add extra patient-level features such as region or insurance type.
+
 
