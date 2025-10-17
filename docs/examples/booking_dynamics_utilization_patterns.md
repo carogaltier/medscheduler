@@ -187,5 +187,7 @@ This configuration produces a flatter utilization pattern, where upcoming slots 
 ### Next Steps
 - Learn how booking behavior interacts with attendance in {doc}`../api-reference/attendance_behavior`  
 - Explore how slot timing affects punctuality in {doc}`../api-reference/appointment_timing`  
-- Revisit {doc}`../api-reference/seasonality_weights` to see how temporal weights further influence booking density.
+- Revisit {doc}`../api-reference/seasonality_weights` to see how temporal weights further influence booking density.  
+- Continue with {doc}`attendance_behavior_and_rebooking` to analyze how rebooking dynamics and cancellations evolve after scheduling.
+
 
