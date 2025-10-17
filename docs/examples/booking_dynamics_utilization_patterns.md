@@ -184,7 +184,7 @@ This configuration produces a flatter utilization pattern, where upcoming slots 
 
 ---
 
-## Next Steps
+### Next Steps
 - Learn how booking behavior interacts with attendance in {doc}`../api-reference/attendance_behavior`  
 - Explore how slot timing affects punctuality in {doc}`../api-reference/appointment_timing`  
 - Revisit {doc}`../api-reference/seasonality_weights` to see how temporal weights further influence booking density.
