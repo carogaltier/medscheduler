@@ -1993,5 +1993,6 @@ def plot_custom_column_distribution(
     ax.grid(axis="x", linestyle="--", alpha=0.7, zorder=-1)
     ax.set_yticks(range(len(categories)))
     ax.set_yticklabels(categories, fontsize=9)
+    ax.invert_yaxis()
     fig.tight_layout()
     return ax
