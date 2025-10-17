@@ -1900,10 +1900,15 @@ def plot_custom_column_distribution(
     df: pd.DataFrame,
     column: str,
     title_prefix: str = "Percentage of Patients by",
-    top_n: Optional[int] = None
+    top_n: Optional[int] = None,
+    base_height_per_category: float = 0.7,
+    min_height: float = 2.5,
+    max_height: float = 10.0
 ) -> plt.Axes:
     """
-    Plot the percentage distribution of a custom categorical column (e.g. insurance type, region, provider group).
+    Plot the percentage distribution of a custom categorical column
+    (e.g. insurance type, region, provider group), keeping the natural
+    category order instead of sorting by frequency.
 
     Parameters
     ----------
@@ -1915,6 +1920,12 @@ def plot_custom_column_distribution(
         Prefix for the plot title. The column name will be appended in title case.
     top_n : int, optional
         Limit to show only the top N categories by frequency (useful for long tails).
+    base_height_per_category : float, default=0.7
+        Vertical space (in inches) allocated per category.
+    min_height : float, default=2.5
+        Minimum total figure height (in inches).
+    max_height : float, default=10.0
+        Maximum total figure height (in inches).
 
     Returns
     -------
@@ -1925,33 +1936,41 @@ def plot_custom_column_distribution(
     # --- Validation
     if column not in df.columns:
         return _empty_plot(f"Column '{column}' not found in DataFrame.")
-
     if df[column].dropna().empty:
         return _empty_plot(f"No valid data found in column '{column}'.")
 
     # --- Prepare data
-    value_counts = (
-        df[column]
-        .value_counts(normalize=True)
-        .mul(100)
-        .sort_values(ascending=True)
-    )
+    value_counts = df[column].value_counts(normalize=True).mul(100)
 
+    # --- Keep the natural order of categories
+    if isinstance(df[column].dtype, pd.CategoricalDtype) and df[column].cat.ordered:
+        categories = df[column].cat.categories
+        value_counts = value_counts.reindex(categories, fill_value=0)
+    else:
+        # Preserve the first appearance order in the DataFrame
+        unique_order = df[column].dropna().unique()
+        value_counts = value_counts.reindex(unique_order, fill_value=0)
+
+    # --- Optionally limit to top N categories
     if top_n is not None and len(value_counts) > top_n:
-        value_counts = value_counts.tail(top_n)
+        value_counts = value_counts[:top_n]
 
     categories = value_counts.index
     percentages = value_counts.values
 
+    # --- Dynamic figure height
+    n_cats = len(categories)
+    fig_height = min(max(n_cats * base_height_per_category, min_height), max_height)
+
     # --- Create plot
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(9, fig_height))
     bars = ax.barh(categories, percentages, color=COLORS["primary"], zorder=3)
 
     # --- Title & labels
     formatted_col_name = column.replace("_", " ").title()
     ax.set_title(
         f"{title_prefix} {formatted_col_name}",
-        loc="left", fontsize=12, weight="bold", pad=12
+        loc="left", fontsize=12, pad=14, x=-0.05
     )
     ax.set_xlabel("Percentage (%)", labelpad=10, fontsize=10.5)
     ax.set_xlim(0, max(percentages) * 1.15 if percentages.size > 0 else 1)
@@ -1972,6 +1991,7 @@ def plot_custom_column_distribution(
     # --- Style adjustments
     ax.spines[["right", "top"]].set_visible(False)
     ax.grid(axis="x", linestyle="--", alpha=0.7, zorder=-1)
+    ax.set_yticks(range(len(categories)))
     ax.set_yticklabels(categories, fontsize=9)
     fig.tight_layout()
     return ax
