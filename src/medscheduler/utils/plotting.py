@@ -903,7 +903,6 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
 # ---------------------------------------------------------------
 def plot_first_attendance_distribution(
     df: pd.DataFrame,
-    *,
     scheduler: object,
     patient_id_col: str = "patient_id",
     appointment_date_col: str = "appointment_date"
@@ -1174,7 +1173,6 @@ def plot_population_pyramid(
 
 def plot_patients_visits(
     df: pd.DataFrame,
-    *,
     years_back: int = 1,
     patient_id_col: str = "patient_id",
     appointment_date_col: str = "appointment_date",
