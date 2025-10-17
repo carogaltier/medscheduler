@@ -150,5 +150,7 @@ This configuration suits high-volume diagnostics or vaccination sessions where s
 ### Next Steps  
 - Examine {doc}`../api-reference/appointments_table` for time variables.  
 - Review {doc}`../api-reference/randomness_and_noise` to understand stochastic components.  
-- Explore {doc}`../api-reference/attendance_behavior` to connect punctuality with attendance outcomes.
+- Explore {doc}`../api-reference/attendance_behavior` to connect punctuality with attendance outcomes.  
+- Revisit {doc}`patient_flow_demographics` to analyze how demographic traits affect punctuality trends.
+
 
