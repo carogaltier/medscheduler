@@ -835,7 +835,9 @@ def plot_status_distribution_next_days(
     return ax
 
 
-
+# ---------------------------------------------------------------
+# Plot: Weekday Appointment Distribution
+# ---------------------------------------------------------------
 def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
     """
     Plot the percentage distribution of appointments by weekday.
@@ -895,6 +897,125 @@ def plot_weekday_appointment_distribution(df: pd.DataFrame) -> plt.Axes:
         )
     fig.tight_layout()
     return ax
+    
+# ---------------------------------------------------------------
+# Plot: First Attendance Distribution
+# ---------------------------------------------------------------
+def plot_first_attendance_distribution(
+    df: pd.DataFrame,
+    *,
+    scheduler: object,
+    patient_id_col: str = "patient_id",
+    appointment_date_col: str = "appointment_date"
+) -> plt.Axes:
+    """
+    Plot the actual proportion of first vs returning attendances calculated from the appointments dataset.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame containing at least `patient_id_col` and `appointment_date_col`.
+    scheduler : object
+        Scheduler instance containing the `first_attendance` attribute (used as reference).
+    patient_id_col : str, default="patient_id"
+        Column name for patient identifiers.
+    appointment_date_col : str, default="appointment_date"
+        Column name for appointment dates.
+
+    Returns
+    -------
+    plt.Axes
+        Matplotlib Axes object for the generated plot.
+    """
+
+    # --- Validation
+    required_cols = {patient_id_col, appointment_date_col}
+    missing = required_cols - set(df.columns)
+    if missing:
+        return _empty_plot(f"DataFrame must contain columns: {', '.join(missing)}")
+
+    if not hasattr(scheduler, "first_attendance"):
+        return _empty_plot("Scheduler must have a 'first_attendance' attribute.")
+
+    if df.empty:
+        return _empty_plot("No appointment data available.")
+
+    # --- Ensure datetime format
+    if not pd.api.types.is_datetime64_any_dtype(df[appointment_date_col]):
+        df[appointment_date_col] = pd.to_datetime(df[appointment_date_col], errors="coerce")
+
+    # --- Identify first appointment per patient
+    first_dates = (
+        df.groupby(patient_id_col)[appointment_date_col]
+        .min()
+        .rename("first_appointment_date")
+    )
+    df = df.merge(first_dates, on=patient_id_col, how="left")
+
+    # --- Determine first vs returning appointments
+    df["is_first_attendance"] = df[appointment_date_col] == df["first_appointment_date"]
+
+    # --- Compute actual proportions
+    total_appointments = len(df)
+    first_count = df["is_first_attendance"].sum()
+    returning_count = total_appointments - first_count
+
+    first_rate_real = first_count / total_appointments
+    returning_rate_real = 1 - first_rate_real
+
+    categories = ["Returning Patients", "First Attendances"]
+    values = [returning_rate_real * 100, first_rate_real * 100]
+    colors = [COLORS["primary"], COLORS["secondary"]]
+
+    # --- Create plot
+    fig, ax = plt.subplots(figsize=(4, 5))
+    bars = ax.bar(categories, values, color=colors, width=0.3, zorder=3)
+
+    # --- Title and labels
+    ax.set_title(
+        "New vs Returning Patients (Observed)",
+        loc="left", fontsize=12, y=1.08, x=-0.3
+    )
+    ax.set_ylabel("Percentage of Patients", labelpad=10, fontsize=10.5)
+    ax.set_ylim(0, 100)
+
+    # --- Style adjustments
+    ax.spines[["right", "top"]].set_visible(False)
+    ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
+
+    # --- Percentage labels
+    for bar, pct in zip(bars, values):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + 1.5,
+            f"{pct:.1f}%",
+            ha="center", fontsize=9,
+            color=COLORS["text"], fontweight="bold"
+        )
+
+    # --- Reference line for configured ratio
+    configured_rate = scheduler.first_attendance * 100
+    ax.axhline(
+        configured_rate,
+        color=COLORS["text"],
+        linestyle="--",
+        linewidth=1.3,
+        zorder=4
+    )
+
+    # --- Label for configured value
+    ax.text(
+        0.2, configured_rate - 2.5,
+        f"Expected: {configured_rate:.1f}%",
+        ha="left", va="top",
+        fontsize=9,
+        fontweight="bold",
+        color=COLORS["text"]
+    )
+
+    fig.tight_layout()
+    return ax
+
 
 # ---------------------------------------------------------------
 # Plot: Population Pyramid by Age and Sex
