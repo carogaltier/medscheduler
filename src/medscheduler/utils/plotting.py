@@ -1051,6 +1051,146 @@ def plot_population_pyramid(
     return ax
 
 
+def plot_patients_visits(
+    df: pd.DataFrame,
+    *,
+    years_back: int = 1,
+    patient_id_col: str = "patient_id",
+    appointment_date_col: str = "appointment_date",
+    min_pct_threshold: float = 0.1
+) -> plt.Axes:
+    """
+    Plot the distribution of patient visit counts over the last N years.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame containing at least `patient_id_col` and `appointment_date_col`.
+    years_back : int, default=3
+        Number of years prior to the latest appointment date to include.
+    patient_id_col : str, default="patient_id"
+        Column name for patient identifiers.
+    appointment_date_col : str, default="appointment_date"
+        Column name for appointment dates.
+    min_pct_threshold : float, default=0.1
+        Minimum percentage threshold to include a bar in the plot.
+
+    Returns
+    -------
+    plt.Axes
+        Matplotlib Axes object for the generated plot.
+    """
+
+    # --- Validation
+    required_cols = {patient_id_col, appointment_date_col}
+    missing = required_cols - set(df.columns)
+    if missing:
+        raise ValueError(f"DataFrame must contain columns: {', '.join(missing)}")
+
+    if df.empty:
+        return _empty_plot("No appointment data available.")
+
+    # --- Ensure datetime type
+    if not pd.api.types.is_datetime64_any_dtype(df[appointment_date_col]):
+        df[appointment_date_col] = pd.to_datetime(df[appointment_date_col], errors="coerce")
+
+    # --- Filter by years_back window
+    max_date = df[appointment_date_col].max()
+    if pd.isna(max_date):
+        return _empty_plot("Invalid or missing appointment dates.")
+    min_date = max_date - pd.DateOffset(years=years_back)
+    filtered_df = df[df[appointment_date_col] >= min_date]
+
+    if filtered_df.empty:
+        return _empty_plot(f"No data available for the last {years_back} years.")
+
+    # --- Compute visit counts per patient
+    visits_per_patient = filtered_df.groupby(patient_id_col).size()
+    counts, edges = np.histogram(visits_per_patient, bins=range(1, int(visits_per_patient.max()) + 2))
+    percentages = (counts / visits_per_patient.size) * 100
+
+    # --- Filter bins above threshold
+    valid_bins = [
+        (x, count, pct)
+        for x, count, pct in zip(edges[:-1], counts, percentages)
+        if pct >= min_pct_threshold
+    ]
+    if not valid_bins:
+        return _empty_plot(f"No visit frequencies meet the {min_pct_threshold}% threshold.")
+
+    valid_x = [x for x, _, _ in valid_bins]
+    valid_counts = [count for _, count, _ in valid_bins]
+    valid_percentages = [pct for _, _, pct in valid_bins]
+
+    # --- Dynamic figure width
+    max_visits = int(visits_per_patient.max())
+    if max_visits <= 6:
+        fig_width = 3.5
+    elif max_visits <= 11:
+        fig_width = 5
+    else:
+        fig_width = 8
+
+    # --- Create figure
+    fig, ax = plt.subplots(figsize=(fig_width, 4.5))
+    fig.suptitle(
+        f"Patient Visit Distribution over the Last {years_back} Years",
+        fontsize=12, x=0.12, y=1.04, ha="center"
+    )
+
+    # --- Plot bars (ticks centered)
+    bar_width = 0.75
+    ax.bar(
+        valid_x, valid_counts,
+        width=bar_width, align="center",
+        edgecolor="#ffffff", color=COLORS["primary"], zorder=3
+    )
+
+    # --- Axis labels and formatting
+    ax.set_xticks([x for x in valid_x])
+    ax.set_xticklabels([int(x) for x in valid_x], ha="center")
+    ax.set_xlabel("Number of Visits", labelpad=10, fontsize=10.5)
+    ax.set_ylabel("Number of Patients", labelpad=10, fontsize=10.5)
+
+    # --- Style adjustments
+    ax.spines[["right", "top"]].set_visible(False)
+    ax.grid(axis="y", linestyle="--", alpha=0.7, zorder=-1)
+
+    # --- Add percentage labels
+    for x, count, pct in zip(valid_x, valid_counts, valid_percentages):
+        ax.text(
+            x, count + (max(valid_counts) * 0.025),
+            f"{pct:.1f}%", fontsize=9, fontweight="bold",
+            color=COLORS["text"], ha="center"
+        )
+
+    # --- Vertical reference line for mean annual visits
+    mean_visits = visits_per_patient.mean()
+    ax.axvline(
+        mean_visits,
+        color=COLORS["text"],
+        linestyle="--",
+        linewidth=1.5,
+        zorder=4
+    )
+
+    # --- Optional: label for the line
+    ax.text(
+        mean_visits,
+        max(valid_counts) * 1.1,
+        f"Mean: {mean_visits:.1f}",
+        ha="center",
+        va="bottom",
+        fontsize=9,
+        fontweight="bold",
+        color=COLORS["text"]
+    )
+
+
+    fig.tight_layout()
+    return ax
+
+
 def plot_appointments_by_status(
     df: pd.DataFrame,
     *,
