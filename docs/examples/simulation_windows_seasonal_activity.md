@@ -141,5 +141,7 @@ As a result, months with more weekdays or with heavier weekday weighting (e.g. m
 - Explore parameter definitions in {doc}`../api-reference/date_ranges_ref_date`  
 - Learn how seasonality modifies utilization: {doc}`../api-reference/seasonality_weights`  
 - Understand how booking and fill rate interact with time ranges: {doc}`../api-reference/booking_dynamics`  
-- Visualize calendar structures in detail: {doc}`../visualization/plot_past_slot_availability`
+- Visualize calendar structures in detail: {doc}`../visualization/plot_past_slot_availability`  
+- Continue with {doc}`calendar_structure_daily_capacity` to analyze daily slot capacity across weekdays.
+
 
